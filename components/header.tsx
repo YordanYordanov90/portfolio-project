@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import { ScrollProgress } from "./scroll-progress";
 
 const navLinks = [
   { href: "#projects", label: "Projects" },
@@ -95,6 +96,8 @@ export function Header() {
           ))}
         </nav>
       </div>
+
+      <ScrollProgress />
     </header>
   );
 }

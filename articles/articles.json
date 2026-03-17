@@ -1,0 +1,35 @@
+{
+  "id": "my-nextjs-ai-journey",
+  "title": "From Idea to Intelligence: Why I Build AI-Powered Apps with Next.js",
+  "date": "2026-03-17",
+  "category": "Development",
+  "author": "Yordan Yordanov",
+  "tags": ["Next.js", "AI", "Full-Stack", "Security"],
+  "content": [
+    {
+      "section": "intro",
+      "heading": "Why Next.js?",
+      "body": "When I started my journey into full-stack development, I wasn't just looking for a framework—I was looking for a workflow that didn't get in my way. Next.js felt like the right choice because it handles the heavy lifting like routing, optimization, and SSR. This allows me to focus on what I actually love: building features and experimenting with AI."
+    },
+    {
+      "section": "workflow",
+      "heading": "The Power of 'Full Stack' in One Place",
+      "body": "Coming from a Windows environment, I really appreciate how seamless the developer experience is. Being able to write my frontend components and then immediately switch to a Server Action or an API route in the same project is a total game-changer. It makes the 'full-stack' title feel less like a hurdle and more like a superpower for a solo builder."
+    },
+    {
+      "section": "ai_integration",
+      "heading": "Where the Magic Happens: Integrating AI",
+      "body": "The real fun starts when you bring AI into the mix. I’ve been using Next.js to build apps that don't just display data but actually 'think.' Whether I'm streaming responses from an LLM or building intelligent automation tools, the framework's ability to handle server-side logic securely means I can keep my API keys safe while delivering a snappy, interactive experience for the user."
+    },
+    {
+      "section": "security",
+      "heading": "Security is Not an Afterthought",
+      "body": "As a builder, I believe that if it isn't secure, it isn't finished. Using Next.js allows me to leverage Server Components to keep sensitive logic off the client-side. By keeping my secrets on the server and using TypeScript to catch errors early, I can reduce the attack surface of my apps from day one."
+    },
+    {
+      "section": "conclusion",
+      "heading": "What’s Next?",
+      "body": "I’m still learning every day, but the combination of Next.js, TypeScript, and AI has opened doors I didn't even know existed. I’m not just building apps; I’m building my future as a developer, one commit at a time."
+    }
+  ]
+}

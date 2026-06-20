@@ -6,16 +6,17 @@ import { Menu, X } from "lucide-react";
 import { ScrollProgress } from "./scroll-progress";
 
 const navLinks = [
-  { href: "#projects", label: "Projects" },
-  { href: "#services", label: "Services" },
-  { href: "#stack", label: "Stack" },
-  { href: "/blog", label: "Blog" },
-  { href: "#contact", label: "Contact" },
+  { href: "#projects", label: "Work", sectionId: "projects" },
+  { href: "#services", label: "Approach", sectionId: "services" },
+  { href: "#stack", label: "Stack", sectionId: "stack" },
+  { href: "/blog", label: "Blog", sectionId: null },
+  { href: "#contact", label: "Contact", sectionId: "contact" },
 ];
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,73 +24,96 @@ export function Header() {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleNavClick = () => {
-    setIsMenuOpen(false);
-  };
+  useEffect(() => {
+    const sectionIds = navLinks
+      .map((link) => link.sectionId)
+      .filter((id): id is string => id !== null);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+        if (visible.length > 0) {
+          setActiveSection(visible[0].target.id);
+        }
+      },
+      { rootMargin: "-40% 0px -50% 0px", threshold: [0, 0.25, 0.5] },
+    );
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <header 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled 
-          ? "bg-background/90 backdrop-blur-md border-b border-border/50 shadow-sm" 
-          : "bg-transparent"
+    <header
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 50,
+        width: "100%",
+      }}
+      className={`transition-[background-color,border-color,backdrop-filter] duration-200 ${
+        scrolled
+          ? "border-b border-border bg-card/80 backdrop-blur-md"
+          : "border-b border-border/60 bg-card/70 backdrop-blur-md"
       }`}
     >
-      <div className="flex items-center justify-between p-6 max-w-6xl mx-auto w-full">
-        <Link 
-          href="/" 
-          className="font-bold text-lg tracking-tighter hover:opacity-80 transition-opacity"
+      <div className="flex items-center justify-between px-6 py-4 max-w-6xl mx-auto w-full">
+        <Link
+          href="/"
+          className="font-mono text-xs text-muted-foreground link-subtle pressable focus-ring"
         >
           Y.Yordanov
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-8" aria-label="Main">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors relative group"
+              data-active={link.sectionId !== null && activeSection === link.sectionId}
+              className="nav-link pressable focus-ring text-sm text-muted-foreground"
             >
               {link.label}
-              <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-primary transition-all duration-300 group-hover:w-full" />
             </Link>
           ))}
         </nav>
 
-        {/* Mobile Menu Button */}
         <button
+          type="button"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="md:hidden p-2 rounded-lg hover:bg-muted transition-colors"
+          className="pressable focus-ring md:hidden p-2 rounded-sm text-muted-foreground"
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           aria-expanded={isMenuOpen}
         >
-          {isMenuOpen ? (
-            <X className="h-5 w-5" />
-          ) : (
-            <Menu className="h-5 w-5" />
-          )}
+          {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
 
-      {/* Mobile Navigation */}
       <div
-        className={`md:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-md border-b border-border/50 transition-all duration-300 ${
-          isMenuOpen 
-            ? "opacity-100 translate-y-0 pointer-events-auto" 
-            : "opacity-0 -translate-y-4 pointer-events-none"
-        }`}
+        className="mobile-menu overflow-hidden border-t border-border md:hidden"
+        data-open={isMenuOpen}
       >
-        <nav className="flex flex-col p-6 gap-4">
+        <nav className="flex flex-col gap-1 px-6 py-4" aria-label="Main mobile">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              onClick={handleNavClick}
-              className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
+              onClick={() => setIsMenuOpen(false)}
+              data-active={link.sectionId !== null && activeSection === link.sectionId}
+              className="nav-link pressable focus-ring py-2 text-sm text-muted-foreground"
             >
               {link.label}
             </Link>

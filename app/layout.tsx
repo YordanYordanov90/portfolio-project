@@ -1,8 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/header";
-import { Footer } from "@/components/sections/footer";
+import { SiteChrome } from "@/components/site-chrome";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,12 +14,12 @@ const geistMono = Geist_Mono({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#0a0a0a",
+  themeColor: "#0d0f12",
 };
 
 export const metadata: Metadata = {
   title: "Professional Portfolio",
-  description: "Building secure, full-stack software and AI-driven solutions.",
+  description: "Full-stack builder shipping secure, AI-powered software.",
 };
 
 export default function RootLayout({
@@ -33,9 +32,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-background text-foreground`}
       >
-        <Header />
-        {children}
-        <Footer />
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   );

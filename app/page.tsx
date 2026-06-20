@@ -5,12 +5,14 @@ import { TechStack } from "@/components/sections/tech-stack";
 
 export default function Home() {
   return (
-    <main className="flex flex-col items-start justify-center pt-16 md:pt-20 pb-14 md:pb-16 px-6 sm:px-12 max-w-6xl mx-auto w-full">
+    <main className="mx-auto w-full max-w-6xl px-6 pb-24">
       <Hero />
+      <div className="grain-line" aria-hidden />
       <Projects />
+      <div className="grain-line" aria-hidden />
       <Services />
+      <div className="grain-line" aria-hidden />
       <TechStack />
-   
     </main>
   );
 }

@@ -1,20 +1,48 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-  --card: #151515;
-  --card-foreground: #ededed;
-  --border: #262626;
-  --primary: #ededed;
-  --primary-foreground: #0a0a0a;
-  --muted: #171717;
-  --muted-foreground: #a3a3a3;
+  --background: #0d0f12;
+  --foreground: #e8e4dc;
+  --card: rgba(22, 26, 32, 0.52);
+  --card-foreground: #e8e4dc;
+  --border: rgba(42, 47, 56, 0.5);
+  --scrim: rgba(13, 15, 18, 0.42);
+  --primary: #7ec8e3;
+  --primary-foreground: #0d0f12;
+  --muted: rgba(22, 26, 32, 0.4);
+  --muted-foreground: #8a8f98;
+  --accent: #5ba4e0;
+  --glow: rgba(126, 200, 227, 0.14);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --header-height: 4.5rem;
 }
 
 html {
   color-scheme: dark;
   background-color: var(--background);
+  scroll-behavior: smooth;
+}
+
+html::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-image: url("/road.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+html::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--scrim);
+  pointer-events: none;
 }
 
 @theme {
@@ -27,37 +55,357 @@ html {
   --color-primary-foreground: var(--primary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
 
-  /* Set defaults for semantic tailwind classes */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 body {
-  background-color: var(--background);
+  background-color: transparent;
   color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
 }
 
-/*
-  App is always-dark: avoid global transitions that can animate from the UA's
-  initial white background to dark on first paint (visible "flash").
-*/
-
-/* Smooth scroll for anchor links */
-html {
-  scroll-behavior: smooth;
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
 }
 
-/* Respect user's motion preferences */
+/* Interaction utilities */
+.pressable {
+  transition: transform 160ms var(--ease-out), opacity 160ms var(--ease-out),
+    border-color 160ms var(--ease-out), color 160ms var(--ease-out),
+    background-color 160ms var(--ease-out);
+}
+
+.pressable:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  display: inline-flex;
+  height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  background-color: var(--primary);
+  padding: 0 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--primary-foreground);
+  transition: transform 160ms var(--ease-out), opacity 160ms var(--ease-out);
+}
+
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary:hover {
+    opacity: 0.9;
+  }
+}
+
+.btn-secondary {
+  display: inline-flex;
+  height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  border: 1px solid var(--border);
+  padding: 0 1.5rem;
+  font-size: 0.875rem;
+  color: var(--foreground);
+  transition: transform 160ms var(--ease-out), border-color 160ms var(--ease-out);
+}
+
+.btn-secondary:active {
+  transform: scale(0.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-secondary:hover {
+    border-color: var(--muted-foreground);
+  }
+}
+
+.link-subtle {
+  transition: color 160ms var(--ease-out), opacity 160ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .link-subtle:hover {
+    color: var(--primary);
+  }
+}
+
+.nav-link {
+  position: relative;
+  transition: color 160ms var(--ease-out), transform 160ms var(--ease-out);
+}
+
+.nav-link:active {
+  transform: scale(0.97);
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 1px;
+  background: var(--primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 200ms var(--ease-out);
+}
+
+.nav-link[data-active="true"] {
+  color: var(--foreground);
+}
+
+.nav-link[data-active="true"]::after {
+  transform: scaleX(1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .nav-link:hover {
+    color: var(--foreground);
+  }
+}
+
+.section-anchor {
+  scroll-margin-top: var(--header-height);
+}
+
+.section-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  color: var(--muted-foreground);
+}
+
+.principle-row {
+  transition: border-color 180ms var(--ease-out), background-color 180ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .principle-row:hover {
+    background-color: color-mix(in srgb, var(--card) 60%, transparent);
+    border-color: color-mix(in srgb, var(--primary) 25%, var(--border));
+  }
+}
+
+.project-tab {
+  transition: border-color 180ms var(--ease-out), background-color 180ms var(--ease-out);
+}
+
+.project-tab[data-active="true"] {
+  background-color: color-mix(in srgb, var(--card) 70%, transparent);
+  border-color: color-mix(in srgb, var(--primary) 30%, var(--border));
+}
+
+.project-tab-title {
+  transition: color 160ms var(--ease-out);
+}
+
+.project-tab-icon {
+  opacity: 0;
+  transition: opacity 160ms var(--ease-out), color 160ms var(--ease-out),
+    transform 160ms var(--ease-out);
+}
+
+.project-tab[data-active="true"] .project-tab-title {
+  color: var(--primary);
+}
+
+.project-tab[data-active="true"] .project-tab-icon {
+  opacity: 1;
+  color: var(--primary);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .project-tab:hover {
+    background-color: color-mix(in srgb, var(--card) 50%, transparent);
+  }
+
+  .project-tab:hover .project-tab-title {
+    color: var(--foreground);
+  }
+
+  .project-tab:hover .project-tab-icon {
+    opacity: 1;
+    transform: translate(1px, -1px);
+  }
+}
+
+.btn-content {
+  transition: filter 180ms var(--ease-out), opacity 180ms var(--ease-out),
+    transform 180ms var(--ease-out);
+}
+
+.btn-content[data-transitioning="true"] {
+  filter: blur(2px);
+  opacity: 0.6;
+}
+
+.focus-ring:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+
+.grain-line {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--border) 20%,
+    var(--border) 80%,
+    transparent
+  );
+  height: 1px;
+}
+
+.project-image {
+  transition: transform 220ms var(--ease-out);
+  will-change: transform;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover .project-image {
+    transform: scale(1.03);
+  }
+
+  .project-card:hover .project-title {
+    color: var(--primary);
+  }
+
+  .project-card:hover .project-icon {
+    opacity: 1;
+  }
+}
+
+.project-title {
+  transition: color 160ms var(--ease-out);
+}
+
+.project-icon {
+  opacity: 0;
+  transition: opacity 160ms var(--ease-out);
+}
+
+.stack-chip {
+  transition: border-color 160ms var(--ease-out), color 160ms var(--ease-out),
+    transform 160ms var(--ease-out);
+}
+
+.stack-chip:active {
+  transform: scale(0.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .stack-chip:hover {
+    border-color: color-mix(in srgb, var(--primary) 50%, transparent);
+    color: var(--primary);
+  }
+}
+
+.mobile-menu {
+  transform-origin: top center;
+  transition: transform 200ms var(--ease-out), opacity 180ms var(--ease-out);
+}
+
+.mobile-menu[data-open="false"] {
+  transform: scaleY(0.96);
+  opacity: 0;
+  pointer-events: none;
+  transition-duration: 140ms;
+}
+
+.mobile-menu[data-open="true"] {
+  transform: scaleY(1);
+  opacity: 1;
+}
+
+@keyframes cursor-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.cursor-blink {
+  animation: cursor-blink 1s step-end infinite;
+}
+
+.bg-card {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.glass-panel {
+  background-color: var(--card);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 0 40px var(--glow);
+}
+
+.contact-field {
+  background-color: color-mix(in srgb, var(--card) 22%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.contact-field:focus-visible {
+  background-color: color-mix(in srgb, var(--card) 38%, transparent);
+  border-color: color-mix(in srgb, var(--primary) 45%, var(--border));
+}
+
+.social-link {
+  transition: border-color 160ms var(--ease-out), color 160ms var(--ease-out),
+    background-color 160ms var(--ease-out), transform 160ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .social-link:hover {
+    border-color: color-mix(in srgb, var(--primary) 40%, var(--border));
+    color: var(--primary);
+    background-color: color-mix(in srgb, var(--card) 65%, transparent);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-  
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+
+  .pressable:active,
+  .btn-primary:active,
+  .btn-secondary:active,
+  .stack-chip:active,
+  .nav-link:active {
+    transform: none;
+  }
+
+  .mobile-menu,
+  .project-image,
+  .project-tab,
+  .project-tab-icon,
+  .nav-link::after {
+    transition: none;
+  }
+
+  .cursor-blink {
+    animation: none;
   }
 }

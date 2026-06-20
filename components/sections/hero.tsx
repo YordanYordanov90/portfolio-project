@@ -1,52 +1,59 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Terminal } from "lucide-react";
 import Link from "next/link";
-import { SectionWrapper } from "@/components/section-wrapper";
+import { AuditLog } from "@/components/audit-log";
+import { fadeUp, enterUp, enterUpVisible, EASE_OUT } from "@/lib/motion";
 
 export function Hero() {
   return (
-    <SectionWrapper
-      className="flex min-h-screen flex-col justify-center pt-19 pb-8 md:pt-10 md:pb-4"
+    <section
       id="hero"
+      className="section-anchor grid min-h-[calc(100vh-var(--header-height))] gap-12 py-16 md:grid-cols-[1.1fr_0.9fr] md:items-end md:py-24"
     >
-      <div className="flex flex-col gap-6 max-w-3xl">
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-3 py-1 text-sm font-medium text-muted-foreground bg-muted w-fit rounded-full"
+      <motion.div initial="hidden" animate="visible" className="flex flex-col gap-8">
+        <motion.p custom={0} variants={fadeUp} className="section-eyebrow text-primary">
+          Full-stack builder · security-minded
+        </motion.p>
+
+        <motion.h1
+          custom={1}
+          variants={fadeUp}
+          className="text-[clamp(2.75rem,8vw,5.5rem)] font-semibold leading-[0.95] tracking-tight"
         >
-          <Terminal className="h-4 w-4" />
-          <span>Builder. Learner. Security-Focused</span>
+          I ship software
+          <br />
+          <span className="text-muted-foreground">that holds up</span>
+          <br />
+          under inspection.
+        </motion.h1>
+
+        <motion.p
+          custom={2}
+          variants={fadeUp}
+          className="max-w-md text-lg leading-relaxed text-muted-foreground"
+        >
+          From interface polish to hardened backends — I care about the entire
+          stack, especially the parts users never see.
+        </motion.p>
+
+        <motion.div custom={3} variants={fadeUp} className="flex flex-wrap gap-4">
+          <Link href="#projects" className="focus-ring btn-primary">
+            See selected work
+          </Link>
+          <Link href="#contact" className="focus-ring btn-secondary">
+            Get in touch
+          </Link>
         </motion.div>
+      </motion.div>
 
-        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight text-foreground">
-         Building the future with code  {" "}
-          <span className="text-muted-foreground">and a little bit of AI.</span>
-        </h1>
-
-        <p className="max-w-xl text-lg sm:text-xl text-muted-foreground leading-relaxed mt-2">
-            &quot;I love the entire process of building software—from styling a clean interface to the deep-dive logic of making sure a backend is completely secure.&quot;  
-        </p>
-
-        <div className="flex flex-col sm:flex-row gap-4 mt-6">
-          <Link
-            href="#projects"
-            className="inline-flex h-12 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90"
-          >
-            View Projects
-          </Link>
-          <Link
-            href="#contact"
-            className="inline-flex h-12 items-center justify-center rounded-md border border-border bg-background px-8 text-sm font-medium shadow-sm transition-colors hover:bg-muted"
-          >
-            Get In Touch
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Link>
-        </div>
-      </div>
-    </SectionWrapper>
+      <motion.div
+        initial={enterUp(8)}
+        animate={enterUpVisible}
+        transition={{ delay: 0.18, duration: 0.26, ease: EASE_OUT }}
+      >
+        <AuditLog />
+      </motion.div>
+    </section>
   );
 }

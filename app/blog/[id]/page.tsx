@@ -59,7 +59,7 @@ export default async function ArticlePage({ params }: PageProps) {
   });
 
   return (
-    <main className="flex flex-col items-center justify-center pt-32 pb-16 px-6 sm:px-12 max-w-4xl mx-auto w-full">
+    <main className="flex flex-col items-center justify-center pb-16 px-6 sm:px-12 max-w-4xl mx-auto w-full">
       <SectionWrapper className="w-full">
         <div className="flex flex-col gap-4 mb-8">
           <Link

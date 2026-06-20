@@ -2,41 +2,13 @@
 
 import { useId, useRef, useState } from "react";
 import { SectionWrapper } from "@/components/section-wrapper";
-import { Mail, Loader2, CheckCircle2 } from "lucide-react";
+import { Loader2, CheckCircle2, Github, Linkedin } from "lucide-react";
 import Link from "next/link";
-import { siGithub } from "simple-icons";
 import { z } from "zod";
+import { SOCIAL_LINKS } from "@/lib/constants";
 
 const RATE_LIMIT_KEY = "contact_form_last_submit";
 const RATE_LIMIT_MINUTES = 5;
-
-type SimpleIconData = {
-  title: string;
-  path: string;
-};
-
-function SimpleIcon({
-  icon,
-  className,
-  title,
-}: {
-  icon: SimpleIconData;
-  className?: string;
-  title?: string;
-}) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden={title ? undefined : true}
-      role={title ? "img" : "presentation"}
-      className={className}
-      fill="currentColor"
-    >
-      {title ? <title>{title}</title> : null}
-      <path d={icon.path} />
-    </svg>
-  );
-}
 
 function getRateLimitStatus(): { allowed: boolean; remainingMinutes: number } {
   if (typeof window === "undefined") return { allowed: true, remainingMinutes: 0 };
@@ -158,36 +130,35 @@ export function Footer() {
   }
 
   return (
-    <SectionWrapper
-      id="contact"
-      className="py-12 border-t border-border mt-20 max-w-5xl mx-auto w-full"
-    >
-      <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-start">
-        {/* Left side - Intro text */}
+    <>
+      <div className="grain-line mx-auto max-w-6xl px-6" aria-hidden />
+      <SectionWrapper id="contact" className="mx-auto max-w-6xl px-6 py-16 md:py-20">
+      <div className="grid items-start gap-10 md:grid-cols-2 md:gap-16">
         <div className="flex flex-col gap-3 text-center md:text-left">
-          <h2 className="text-2xl font-bold tracking-tight">Let&apos;s Connect</h2>
-          <p className="text-muted-foreground max-w-md text-sm leading-relaxed">
-            I&apos;m always excited to connect with fellow builders to chat about AI integration, web
-            security, or the latest developments in the Next.js world.
+          <p className="section-eyebrow">contact</p>
+          <h2 className="text-4xl font-semibold tracking-tight md:text-5xl">Let&apos;s talk</h2>
+          <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
+            Open to conversations about AI integration, web security, or Next.js
+            architecture.
           </p>
 
-          {/* Quick contact icons */}
-          <div className="flex justify-center md:justify-start gap-4 mt-4">
-           
-            <Link
-              href="https://github.com/YordanYordanov90"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 bg-muted rounded-full hover:bg-primary hover:text-primary-foreground transition-colors"
-              aria-label="GitHub"
-            >
-              <SimpleIcon icon={siGithub} className="h-5 w-5" title="GitHub" />
-            </Link>
+          <div className="mt-6 flex items-center justify-center gap-3 md:justify-start">
+            {socialLinks.map(({ href, label, icon: Icon }) => (
+              <Link
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="social-link pressable focus-ring inline-flex h-10 w-10 items-center justify-center rounded-sm border border-border bg-card/40 text-muted-foreground backdrop-blur-md"
+              >
+                <Icon className="h-4 w-4" />
+              </Link>
+            ))}
           </div>
         </div>
 
-        {/* Right side - Contact Form */}
-        <div className="rounded-2xl border border-border bg-card/40 backdrop-blur-sm p-5 sm:p-6">
+        <div className="glass-panel rounded-sm border border-border p-5 sm:p-6">
           <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
             {/* Honeypot spam protection (leave empty, bots usually fill it) */}
             <input type="text" name="_gotcha" tabIndex={-1} autoComplete="off" className="hidden" />
@@ -223,9 +194,14 @@ export function Footer() {
               <button
                 type="submit"
                 disabled={status === "sending" || status === "success" || status === "rate_limited"}
-                className="inline-flex w-full items-center justify-center rounded-xl bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-60 disabled:pointer-events-none transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 relative overflow-hidden"
+                className="btn-primary focus-ring relative w-full overflow-hidden disabled:pointer-events-none disabled:opacity-60"
               >
-                <span className={`inline-flex items-center gap-2 transition-all duration-300 ${status === "sending" ? "opacity-0 translate-y-2" : "opacity-100 translate-y-0"}`}>
+                <span
+                  data-transitioning={status === "sending"}
+                  className={`btn-content inline-flex items-center gap-2 ${
+                    status === "sending" ? "translate-y-1 opacity-0" : "translate-y-0 opacity-100"
+                  }`}
+                >
                   {status === "success" ? (
                     <>
                       <CheckCircle2 className="h-4 w-4" />
@@ -248,23 +224,21 @@ export function Footer() {
                 aria-atomic="true"
               >
                 {status === "success" ? (
-                  <span className="text-green-600 dark:text-green-400 font-medium animate-in fade-in slide-in-from-bottom-2 duration-300">
+                  <span className="font-medium text-primary">
                     {statusMessage ?? "Thanks — your message has been sent."}
                   </span>
                 ) : status === "error" ? (
-                  <span className="text-red-600 dark:text-red-400 font-medium animate-in fade-in slide-in-from-bottom-2 duration-300">
+                  <span className="font-medium text-red-400">
                     {statusMessage ?? "Something went wrong. Please try again or email me directly."}
                   </span>
                 ) : status === "rate_limited" ? (
-                  <span className="text-orange-500 font-medium animate-in fade-in slide-in-from-bottom-2 duration-300">
-                    {statusMessage}
-                  </span>
+                  <span className="font-medium text-primary/80">{statusMessage}</span>
                 ) : (
                   <span className="text-muted-foreground">
                     Prefer email?{" "}
                     <Link
                       href="mailto:hello@example.com?subject=Portfolio%20Message"
-                      className="underline underline-offset-4 hover:text-foreground"
+                      className="link-subtle underline underline-offset-4"
                     >
                       Send a direct message
                     </Link>
@@ -278,10 +252,11 @@ export function Footer() {
       </div>
 
       {/* Copyright */}
-      <div className="mt-16 text-center text-sm text-muted-foreground border-t border-border pt-8">
+      <div className="mt-16 border-t border-border pt-8 text-center font-mono text-xs text-muted-foreground">
         © {currentYear} Yordan Yordanov. All rights reserved.
       </div>
     </SectionWrapper>
+    </>
   );
 }
 
@@ -304,6 +279,25 @@ const ContactSchema = z.object({
     .max(2000, "Message is too long."),
   _gotcha: z.string().optional(),
 });
+
+function XIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill="currentColor"
+      aria-hidden
+    >
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  );
+}
+
+const socialLinks = [
+  { href: SOCIAL_LINKS.github, label: "GitHub", icon: Github },
+  { href: SOCIAL_LINKS.x, label: "X", icon: XIcon },
+  { href: SOCIAL_LINKS.linkedin, label: "LinkedIn", icon: Linkedin },
+] as const;
 
 function getString(formData: FormData, key: string) {
   const v = formData.get(key);
@@ -335,7 +329,7 @@ function FloatingField({
   const hintOrError = error ?? hint;
 
   const base =
-    "peer w-full rounded-xl border bg-background/40 px-4 pt-5 pb-2.5 text-sm text-foreground placeholder:text-transparent shadow-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-primary/30";
+    "contact-field peer w-full rounded-sm border px-4 pt-5 pb-2.5 text-sm text-foreground placeholder:text-transparent outline-none transition-[border-color,box-shadow,background-color] duration-200 focus-visible:ring-2 focus-visible:ring-primary/30";
   const border = error
     ? "border-red-500/60 focus-visible:ring-red-500/20"
     : "border-border focus-visible:border-primary/50";

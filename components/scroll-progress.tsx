@@ -20,10 +20,10 @@ export function ScrollProgress() {
   }, []);
 
   return (
-    <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-transparent">
+    <div className="absolute bottom-0 left-0 right-0 h-px bg-transparent" aria-hidden>
       <div
-        className="h-full bg-linear-to-r from-primary via-primary/80 to-primary/60 transition-all duration-150 ease-out"
-        style={{ width: `${progress}%` }}
+        className="h-full bg-primary"
+        style={{ width: `${progress}%`, transition: "width 100ms linear" }}
       />
     </div>
   );

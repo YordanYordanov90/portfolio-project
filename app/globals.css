@@ -6,7 +6,7 @@
   --card: rgba(22, 26, 32, 0.52);
   --card-foreground: #e8e4dc;
   --border: rgba(42, 47, 56, 0.5);
-  --scrim: rgba(13, 15, 18, 0.42);
+  --scrim: rgba(13, 15, 18, 0.54);
   --primary: #7ec8e3;
   --primary-foreground: #0d0f12;
   --muted: rgba(22, 26, 32, 0.4);
@@ -30,7 +30,7 @@ html::before {
   position: fixed;
   inset: 0;
   z-index: -2;
-  background-image: url("/road.jpg");
+  background-image: url("/background.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

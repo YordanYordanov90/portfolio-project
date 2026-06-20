@@ -12,9 +12,15 @@ export function Hero() {
       className="section-anchor grid min-h-[calc(100vh-var(--header-height))] gap-12 py-16 md:grid-cols-[1.1fr_0.9fr] md:items-end md:py-24"
     >
       <motion.div initial="hidden" animate="visible" className="flex flex-col gap-8">
-        <motion.p custom={0} variants={fadeUp} className="section-eyebrow text-primary">
-          Full-stack builder · security-minded
-        </motion.p>
+        <motion.div custom={0} variants={fadeUp} className="flex flex-col gap-4">
+          <span className="inline-flex w-fit items-center gap-2 rounded-full border border-border bg-card/40 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur-md">
+            <span aria-hidden>👋</span>
+            Open to new opportunities — happy to build together
+          </span>
+          <p className="section-eyebrow text-primary">
+            Yordan Yordanov · Full-stack developer · security-minded
+          </p>
+        </motion.div>
 
         <motion.h1
           custom={1}

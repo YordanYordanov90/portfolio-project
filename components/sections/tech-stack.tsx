@@ -8,10 +8,13 @@ const stack = [
   "React",
   "TypeScript",
   "Tailwind CSS",
-  "PostgreSQL",
+  "Neon Postgres",
   "Drizzle ORM",
+  "Clerk Auth",
+  "Vercel AI SDK",
   "Zod",
-  "OpenAI / Claude APIs",
+  "shadcn/ui",
+  "Upstash / QStash",
 ];
 
 export function TechStack() {
@@ -55,9 +58,9 @@ export function TechStack() {
         custom={stack.length + 1}
         className="mt-8 max-w-xl text-sm leading-relaxed text-muted-foreground"
       >
-        React and Next.js for the interface layer. TypeScript and Zod at the
-        boundaries. PostgreSQL and Drizzle underneath. AI APIs where they earn
-        their place.
+        Next.js App Router and React for the interface. TypeScript and Zod at
+        every boundary. Neon Postgres and Drizzle underneath. Vercel AI SDK
+        where AI earns its place.
       </motion.p>
     </section>
   );

@@ -237,7 +237,7 @@ export function Footer() {
                   <span className="text-muted-foreground">
                     Prefer email?{" "}
                     <Link
-                      href="mailto:hello@example.com?subject=Portfolio%20Message"
+                      href="mailto:y.yordanov.work@gmail.com?subject=Portfolio%20Message"
                       className="link-subtle underline underline-offset-4"
                     >
                       Send a direct message

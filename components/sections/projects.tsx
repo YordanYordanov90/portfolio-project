@@ -1,62 +1,13 @@
 "use client";
 
 import { SectionWrapper, AnimatedItem } from "@/components/section-wrapper";
-import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import type { StaticImageData } from "next/image";
-import project1 from "@/public/project1.png";
-import project2 from "@/public/project2.png";
-import project3 from "@/public/project3.png";
-import project4 from "@/public/project4.png";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
+import { PROJECTS } from "@/lib/constants";
 
-type Project = {
-  title: string;
-  description: string;
-  bgClass: string;
-  image: StaticImageData;
-  imageAlt: string;
-  link: string;
-};
-
-const projects: Project[] = [
-  {
-    title: "FlowAI",
-    description: "Your Autonomous Executive Assistant",
-    bgClass:
-      "bg-gradient-to-br from-indigo-900/40 via-purple-900/20 to-pink-900/40",
-    image: project1,
-    imageAlt: "FlowAI",
-    link: "https://flow-ai-eta.vercel.app/",
-  },
-  {
-    title: "CoinHub",
-    description: "Navigate the Crypto Markets with AI Precision",
-    bgClass:
-      "bg-gradient-to-br from-orange-900/40 via-stone-800/40 to-stone-900/60",
-    image: project2,
-    imageAlt: "Next.js Architecture",
-    link: "https://coin-hub-ten.vercel.app/",
-  },
-  {
-    title: "CloudcastAI",
-    description: "Weather AI App",
-    bgClass: "bg-gradient-to-br from-blue-900/40 via-cyan-900/20 to-sky-900/40",
-    image: project3,
-    imageAlt: "Weather App",
-    link: "https://weather-app-lime-kappa-33.vercel.app/",
-  },
-  {
-    title: "Devstash",
-    description: "Organize Your Developer Knowledge",
-    bgClass: "bg-stone-900/50",
-    image: project4,
-    imageAlt: "Secure App Portal",
-    link: "https://devstash-ai.vercel.app/",
-  },
-];
+type Project = (typeof PROJECTS)[number];
 
 function ProjectCard({ project }: { project: Project }) {
   return (
@@ -73,10 +24,7 @@ function ProjectCard({ project }: { project: Project }) {
           <motion.div
             whileHover={{ y: -4 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className={cn(
-              "relative overflow-hidden rounded-[2.5rem] aspect-4/3 border border-white/10 shadow-[0_0_0_1px_rgba(255,255,255,0.02)] transition-all duration-500 group-hover:border-white/20 group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.3)]",
-              project.bgClass,
-            )}
+            className="relative overflow-hidden rounded-[2.5rem] aspect-4/3 border border-white/10 shadow-[0_0_0_1px_rgba(255,255,255,0.02)] transition-all duration-500 group-hover:border-white/20 group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.3)] bg-stone-900/50"
           >
             <Image
               src={project.image}
@@ -104,9 +52,19 @@ function ProjectCard({ project }: { project: Project }) {
             <h3 className="text-xl font-bold tracking-tight text-foreground leading-tight group-hover:text-primary transition-colors duration-300">
               {project.title}
             </h3>
-            <p className="text-sm text-muted-foreground mt-1.5 font-medium leading-snug">
+            <p className="text-sm text-muted-foreground mt-1.5 leading-snug">
               {project.description}
             </p>
+            <div className="mt-3 flex flex-wrap justify-center gap-1.5">
+              {project.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="font-mono text-[11px] px-2 py-0.5 rounded-sm border border-border bg-card/40 text-muted-foreground"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
             <div className="mt-3 text-sm font-semibold text-primary/0 group-hover:text-primary transition-all duration-300 flex items-center gap-1">
               Visit site <ExternalLink className="h-3 w-3" />
             </div>
@@ -143,19 +101,15 @@ export function Projects() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-12 items-start">
         <div className="flex flex-col gap-14 md:mt-16">
-          {projects
-            .filter((_, i) => i % 2 === 0)
-            .map((project) => (
-              <ProjectCard key={project.title} project={project} />
-            ))}
+          {PROJECTS.filter((_, i) => i % 2 === 0).map((project) => (
+            <ProjectCard key={project.title} project={project} />
+          ))}
         </div>
 
         <div className="flex flex-col gap-14">
-          {projects
-            .filter((_, i) => i % 2 !== 0)
-            .map((project) => (
-              <ProjectCard key={project.title} project={project} />
-            ))}
+          {PROJECTS.filter((_, i) => i % 2 !== 0).map((project) => (
+            <ProjectCard key={project.title} project={project} />
+          ))}
         </div>
       </div>
     </SectionWrapper>

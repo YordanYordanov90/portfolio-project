@@ -17,9 +17,30 @@ export const viewport: Viewport = {
   themeColor: "#0d0f12",
 };
 
+const BASE_URL = "https://yordanov.vercel.app";
+
 export const metadata: Metadata = {
-  title: "Professional Portfolio",
-  description: "Full-stack builder shipping secure, AI-powered software.",
+  metadataBase: new URL(BASE_URL),
+  title: "Yordan Yordanov — Full-Stack Developer",
+  description:
+    "Full-stack developer building secure, AI-powered web apps with Next.js, React, and TypeScript.",
+  openGraph: {
+    title: "Yordan Yordanov — Full-Stack Developer",
+    description:
+      "Full-stack developer building secure, AI-powered web apps with Next.js, React, and TypeScript.",
+    url: BASE_URL,
+    siteName: "Yordan Yordanov",
+    type: "website",
+    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "Yordan Yordanov — Full-Stack Developer" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Yordan Yordanov — Full-Stack Developer",
+    description:
+      "Full-stack developer building secure, AI-powered web apps with Next.js, React, and TypeScript.",
+    creator: "@yordanov_y_",
+    images: ["/og.jpg"],
+  },
 };
 
 export default function RootLayout({

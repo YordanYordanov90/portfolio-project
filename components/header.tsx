@@ -6,10 +6,10 @@ import { Menu, X } from "lucide-react";
 import { ScrollProgress } from "./scroll-progress";
 
 const navLinks = [
+  { href: "#about", label: "About", sectionId: "about" },
   { href: "#projects", label: "Work", sectionId: "projects" },
   { href: "#services", label: "Approach", sectionId: "services" },
   { href: "#stack", label: "Stack", sectionId: "stack" },
-  { href: "/blog", label: "Blog", sectionId: null },
   { href: "#contact", label: "Contact", sectionId: "contact" },
 ];
 

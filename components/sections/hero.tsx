@@ -17,9 +17,7 @@ export function Hero() {
             <span aria-hidden>👋</span>
             Open to new opportunities — happy to build together
           </span>
-          <p className="section-eyebrow text-primary">
-            Yordan Yordanov · Full-stack developer · Plovdiv
-          </p>
+       
         </motion.div>
 
         <motion.h1

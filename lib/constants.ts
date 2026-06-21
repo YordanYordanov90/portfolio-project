@@ -12,6 +12,24 @@ export const PROFILE_IMAGE = "/me.jpg";
 
 export const PROJECTS = [
   {
+    title: "PineForge",
+    description:
+      "AI-powered Pine Script v5 generator for TradingView, with auth, rate limiting and strategy helper features.",
+    tags: ["Next.js", "TypeScript", "Vercel AI SDK", "Neon", "Clerk"],
+    image: "/projects/pineforge.png",
+    imageAlt: "PineForge",
+    link: "https://pine-forge.vercel.app/",
+  },
+  {
+    title: "Ghosty AI",
+    description:
+      "AI writing and content tool built on the Next.js App Router with streaming responses via the Vercel AI SDK.",
+    tags: ["Next.js", "Tailwind CSS", "shadcn/ui", "AI SDK"],
+    image: "/projects/ghosty-ai.png",
+    imageAlt: "Ghosty AI",
+    link: "https://ghosty-ai.vercel.app/",
+  },
+  {
     title: "Cod3mate",
     description:
       "A Telegram-first coding agent with a Next.js dashboard, exploring browser automation and agent workflows.",
@@ -28,23 +46,5 @@ export const PROJECTS = [
     image: "/projects/levercast-ai.png",
     imageAlt: "LeverCast AI",
     link: "https://levercast-ai.vercel.app/",
-  },
-  {
-    title: "Ghosty AI",
-    description:
-      "AI writing and content tool built on the Next.js App Router with streaming responses via the Vercel AI SDK.",
-    tags: ["Next.js", "Tailwind CSS", "shadcn/ui", "AI SDK"],
-    image: "/projects/ghosty-ai.png",
-    imageAlt: "Ghosty AI",
-    link: "https://ghosty-ai.vercel.app/",
-  },
-  {
-    title: "PineForge",
-    description:
-      "AI-powered Pine Script v5 generator for TradingView, with auth, rate limiting and strategy helper features.",
-    tags: ["Next.js", "TypeScript", "Vercel AI SDK", "Neon", "Clerk"],
-    image: "/projects/pineforge.png",
-    imageAlt: "PineForge",
-    link: "https://pine-forge.vercel.app/",
   },
 ] as const;

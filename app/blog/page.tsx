@@ -9,18 +9,18 @@ export const metadata = {
 };
 
 export default function BlogPage() {
-  const posts = [
-    {
-      title: articles.title,
-      date: new Date(articles.date).toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      }),
-      excerpt: articles.content[0].body,
-      slug: `/blog/${articles.id}`,
-    }
-  ];
+  const posts = [...articles]
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .map((article) => ({
+    title: article.title,
+    date: new Date(article.date).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }),
+    excerpt: article.content[0].body,
+    slug: `/blog/${article.id}`,
+  }));
 
   return (
     <main className="flex flex-col items-center justify-center pb-16 px-6 sm:px-12 max-w-5xl mx-auto w-full">

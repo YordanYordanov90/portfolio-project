@@ -1,35 +1,177 @@
-{
-  "id": "my-nextjs-ai-journey",
-  "title": "From Idea to Intelligence: Why I Build AI-Powered Apps with Next.js",
-  "date": "2026-03-17",
-  "category": "Development",
-  "author": "Yordan Yordanov",
-  "tags": ["Next.js", "AI", "Full-Stack", "Security"],
-  "content": [
-    {
-      "section": "intro",
-      "heading": "Why Next.js?",
-      "body": "When I started my journey into full-stack development, I wasn't just looking for a framework—I was looking for a workflow that didn't get in my way. Next.js felt like the right choice because it handles the heavy lifting like routing, optimization, and SSR. This allows me to focus on what I actually love: building features and experimenting with AI."
-    },
-    {
-      "section": "workflow",
-      "heading": "The Power of 'Full Stack' in One Place",
-      "body": "Coming from a Windows environment, I really appreciate how seamless the developer experience is. Being able to write my frontend components and then immediately switch to a Server Action or an API route in the same project is a total game-changer. It makes the 'full-stack' title feel less like a hurdle and more like a superpower for a solo builder."
-    },
-    {
-      "section": "ai_integration",
-      "heading": "Where the Magic Happens: Integrating AI",
-      "body": "The real fun starts when you bring AI into the mix. I’ve been using Next.js to build apps that don't just display data but actually 'think.' Whether I'm streaming responses from an LLM or building intelligent automation tools, the framework's ability to handle server-side logic securely means I can keep my API keys safe while delivering a snappy, interactive experience for the user."
-    },
-    {
-      "section": "security",
-      "heading": "Security is Not an Afterthought",
-      "body": "As a builder, I believe that if it isn't secure, it isn't finished. Using Next.js allows me to leverage Server Components to keep sensitive logic off the client-side. By keeping my secrets on the server and using TypeScript to catch errors early, I can reduce the attack surface of my apps from day one."
-    },
-    {
-      "section": "conclusion",
-      "heading": "What’s Next?",
-      "body": "I’m still learning every day, but the combination of Next.js, TypeScript, and AI has opened doors I didn't even know existed. I’m not just building apps; I’m building my future as a developer, one commit at a time."
-    }
-  ]
-}
+[
+  {
+    "id": "my-nextjs-ai-journey",
+    "title": "From Idea to Intelligence: Why I Build AI-Powered Apps with Next.js",
+    "date": "2026-03-17",
+    "category": "Development",
+    "author": "Yordan Yordanov",
+    "tags": ["Next.js", "AI", "Full-Stack", "Security"],
+    "content": [
+      {
+        "section": "intro",
+        "heading": "Why Next.js?",
+        "body": "When I started my journey into full-stack development, I wasn't just looking for a framework—I was looking for a workflow that didn't get in my way. Next.js felt like the right choice because it handles the heavy lifting like routing, optimization, and SSR. This allows me to focus on what I actually love: building features and experimenting with AI."
+      },
+      {
+        "section": "workflow",
+        "heading": "The Power of 'Full Stack' in One Place",
+        "body": "Coming from a Windows environment, I really appreciate how seamless the developer experience is. Being able to write my frontend components and then immediately switch to a Server Action or an API route in the same project is a total game-changer. It makes the 'full-stack' title feel less like a hurdle and more like a superpower for a solo builder."
+      },
+      {
+        "section": "ai_integration",
+        "heading": "Where the Magic Happens: Integrating AI",
+        "body": "The real fun starts when you bring AI into the mix. I've been using Next.js to build apps that don't just display data but actually 'think.' Whether I'm streaming responses from an LLM or building intelligent automation tools, the framework's ability to handle server-side logic securely means I can keep my API keys safe while delivering a snappy, interactive experience for the user."
+      },
+      {
+        "section": "security",
+        "heading": "Security is Not an Afterthought",
+        "body": "As a builder, I believe that if it isn't secure, it isn't finished. Using Next.js allows me to leverage Server Components to keep sensitive logic off the client-side. By keeping my secrets on the server and using TypeScript to catch errors early, I can reduce the attack surface of my apps from day one."
+      },
+      {
+        "section": "conclusion",
+        "heading": "What's Next?",
+        "body": "I'm still learning every day, but the combination of Next.js, TypeScript, and AI has opened doors I didn't even know existed. I'm not just building apps; I'm building my future as a developer, one commit at a time."
+      }
+    ]
+  },
+  {
+    "id": "ghosty-ai-collaborative-system-design",
+    "title": "Ghosty AI — A Real-Time Collaborative System Design Workspace",
+    "date": "2026-06-21",
+    "category": "Development",
+    "author": "Yordan Yordanov",
+    "tags": ["Next.js", "AI", "Real-Time", "Liveblocks", "System Design"],
+    "content": [
+      {
+        "section": "what_it_does",
+        "heading": "What It Does",
+        "body": "The core flow is straightforward. You sign in, create a project, and land in a canvas workspace. From there you can either start from scratch by dragging shapes — rectangles, diamonds, cylinders, hexagons — onto the canvas, or pick a starter template (monolith, microservices, event-driven, serverless) to get a head start. The interesting part is the AI Architect. You open the sidebar, type something like \"design a notification system with email, SMS, and push channels,\" and the agent generates a full architecture directly into the canvas — nodes, edges, labels, all of it. You and your collaborators can then move things around, relabel components, change colors, add connections, and keep iterating. Everything syncs in real time. Once the design looks right, you hit \"Generate Spec\" and the AI reads the current graph plus your chat history and produces a Markdown technical specification saved and available for download straight from the app."
+      },
+      {
+        "section": "stack",
+        "heading": "The Stack",
+        "body": "I built this with the tools I know best and a few new ones I wanted to learn. Next.js (App Router) handles the full-stack framework — server components, API routes, and server actions all in one place. React Flow powers the interactive canvas with nodes, edges, drag-and-drop, zoom, and pan. Liveblocks manages real-time collaboration — shared canvas state, live cursors, presence indicators, and room-scoped chat feeds. Clerk handles authentication including sign-in, sign-up, route protection, and user metadata for presence avatars. Drizzle ORM with Neon Postgres stores projects, collaborators, task run ownership, and spec metadata. Vercel Blob holds canvas snapshots and generated specs stored privately. Trigger.dev runs durable background tasks so both the design agent and the spec generator don't block the UI. The AI layer is powered by the Vercel AI SDK with GPT-4o-mini — structured generation for canvas architectures and free-form generation for Markdown specs. The interface is built with Tailwind CSS and shadcn/ui."
+      },
+      {
+        "section": "decision_liveblocks",
+        "heading": "Liveblocks as the Real-Time Source of Truth",
+        "body": "The canvas state lives in Liveblocks storage, not in my database. Postgres only stores the project metadata and a Vercel Blob URL for autosaved snapshots. This means the collaboration layer is fast and conflict-free, and the database stays simple. I didn't want to manage operational transforms or CRDTs myself — Liveblocks handles all of that, and wiring React Flow's node/edge state through useLiveblocksFlow gave me a fully collaborative canvas with relatively little glue code once I understood the model."
+      },
+      {
+        "section": "decision_background_tasks",
+        "heading": "Background Tasks for AI Generation",
+        "body": "Both the design agent and the spec generator run through Trigger.dev. The API route triggers the task, returns a run ID immediately (HTTP 202), and the frontend subscribes to updates via a scoped public token. The user sees live progress in the sidebar while the agent works. This keeps the request cycle short and the generation resilient — no timeout pressure, no lost work if the connection drops mid-generation."
+      },
+      {
+        "section": "decision_access_control",
+        "heading": "Server-Side Access Control Everywhere",
+        "body": "Every API route and workspace page checks project access through a shared hasProjectAccess function — owner or collaborator, case-insensitive email match. The workspace page itself is a Server Component that redirects unauthenticated users and renders an access-denied screen for unauthorized ones. There are no client-side-only gates. If a request reaches the server and the caller isn't authorized, they get nothing — not even a loading state."
+      },
+      {
+        "section": "learnings",
+        "heading": "What I Learned",
+        "body": "This was my first serious project with Liveblocks, and the collaboration model took some trial and error to internalize. The AI agent pipeline taught me a lot about structured output — I started with generateObject but OpenAI rejected the JSON Schema for discriminated unions, so I switched to generateText with manual JSON extraction and Zod validation, including a retry on parse failure. It's less elegant but more reliable in practice. I also learned that AI-generated canvas layouts need work beyond just producing correct nodes and edges. Positioning and spacing matter a lot for readability, and that's something I'm still improving in the agent's prompt."
+      },
+      {
+        "section": "conclusion",
+        "heading": "Try It",
+        "body": "The app is live at ghosty-ai.vercel.app. Sign up, create a project, and try prompting the AI Architect — or just drag some shapes around and see the real-time sync if you open a second browser tab."
+      }
+    ]
+  },
+  {
+    "id": "pineforge-ai-pine-script-generator",
+    "title": "PineForge — An AI-Powered Pine Script Generator for TradingView Traders",
+    "date": "2026-06-21",
+    "category": "Development",
+    "author": "Yordan Yordanov",
+    "tags": ["Next.js", "AI", "Trading", "xAI", "Agents"],
+    "content": [
+      {
+        "section": "how_it_works",
+        "heading": "How It Works",
+        "body": "You land on the generator page, pick a strategy template or write your own description, set your account balance, and hit Generate. The right panel streams the Pine Script live as it's being written. Once it's done, you get syntax highlighting, a validation badge, and a one-click copy to paste straight into TradingView's Pine Editor. But generation is just the starting point. PineForge is built around the idea that strategies evolve. You can refine any script through a conversational follow-up — tell it to add a volume filter or switch from EMA to VWAP — and each refinement saves as a new version linked to the original. Your full history is searchable, taggable, and organized into collections."
+      },
+      {
+        "section": "forge_agent",
+        "heading": "The Forge Agent",
+        "body": "The feature I'm most proud of is Forge — an AI strategy workflow agent that ties every PineForge capability into one conversational surface. Instead of clicking through separate tabs, you talk to the agent and it orchestrates everything: generate a script, run a health score on it, produce a backtesting checklist, create webhook templates for your broker, search your saved strategies, or refine an existing script — all in a single chat thread. Forge has persistent memory. It learns your preferred markets, timeframes, indicators, and risk tolerance across conversations, so it gets more useful over time. It also has guardrails — it's a strategy workflow tool, not a financial advisor. It won't give buy/sell recommendations, predict prices, or connect to brokers. Under the hood, the agent uses tool calling with seven tools that wrap PineForge's existing backend features. Each tool call shows up inline in the chat with a collapsible card so you can see exactly what the agent did and inspect the results."
+      },
+      {
+        "section": "features",
+        "heading": "What Else Is In There",
+        "body": "Beyond the core generator and the Forge Agent, PineForge has a lot of depth. Strategy Health Score is an AI analysis that rates your script 1–10 on structural quality (not profitability) and flags specific risks like missing volume filters or tight stop placement. Backtesting Summary produces a structured research checklist with recommended timeframes, markets to test on, what to look for in the equity curve, and common failure modes for your strategy type. Alert Message Templates generates ready-to-use webhook JSON for 3Commas, Alertatron, WunderTrading, and custom setups alongside your Pine Script. Strategy DNA Fingerprint creates a deterministic procedural SVG badge for each script in your history, encoding its characteristics so you can visually scan a long list without reading titles. Comparison Reports let you select 2–3 scripts and the AI produces a structured comparison covering entry logic differences, risk profiles, and a coverage map. Strategy Variants quick-generates three alternatives after generation — tighter stops, wider stops, and an alternative indicator approach — each saved with lineage back to the original. Snapshot Export packages everything into a self-contained HTML file with syntax-highlighted Pine Script, health score, backtesting summary, alert templates, and a QR code. Works offline and prints cleanly."
+      },
+      {
+        "section": "stack",
+        "heading": "The Stack",
+        "body": "Next.js (App Router) is the full-stack framework handling server components, API routes, and server actions. TypeScript and Zod validate every API input before any LLM call touches it. xAI Grok via the Vercel AI SDK handles streaming generation across multiple model tiers. Clerk provides auth with custom themed pages and route protection via a proxy middleware. Drizzle ORM with Neon Postgres stores scripts, collections, agent conversations, and memory profiles. Upstash Redis handles rate limiting — per-IP and per-user tier buckets — along with stream concurrency locks. The interface is built with Tailwind CSS and shadcn/ui in a terminal-themed dark UI with a light mode toggle. Shiki applies syntax highlighting post-stream to avoid layout shift during generation."
+      },
+      {
+        "section": "architecture_zod",
+        "heading": "Zod Everywhere",
+        "body": "Every API route validates input with Zod before touching the LLM. Structured AI outputs — health scores, backtesting summaries, alert templates — go through a two-pass validation: a loose schema for the LLM call, then a strict schema before the response leaves the server. The client never sees unvalidated AI output. This two-pass approach lets the LLM be creative in how it fills the structure while still guaranteeing the shape the frontend expects."
+      },
+      {
+        "section": "architecture_rate_limiting",
+        "heading": "Rate Limiting and Entitlements as Separate Layers",
+        "body": "Upstash handles the daily quota as a shared bucket across all AI actions. Model entitlement is a separate check — free users are locked to the fastest model, and Pro models return 403 for free accounts. Stream concurrency is a third layer — one active stream per user via a Redis lock. All three run through a single protectAiRoute() wrapper so every AI endpoint has identical security without duplicating logic. This separation matters: mixing quota, entitlement, and concurrency into one check would make it impossible to give users clear error messages about which limit they hit."
+      },
+      {
+        "section": "architecture_agent_tools",
+        "heading": "Forge Agent Tools Reuse Existing Backend Logic",
+        "body": "The seven tool executors are in-process equivalents of the existing API routes — they import the same system prompts, token budgets, and Zod schemas. So the agent's health score output is identical to what you'd get from the manual Health tab. No shape translation, no drift between agent and direct outputs. The refine tool is a special case: it skips the stream concurrency lock because the parent agent stream already holds it, and acquiring it again would deadlock."
+      },
+      {
+        "section": "learnings",
+        "heading": "What I Learned",
+        "body": "Building PineForge taught me how to think in phases. The project went from a single-page generator to a 68-feature product with an AI agent, and the only reason it didn't collapse under its own weight is that every phase was specced before implementation started. Each feature has its own spec file, and the progress tracker is the source of truth for what's shipped and what's next. The Forge Agent specifically taught me about tool-calling architecture — how to structure tool contracts separately from executors, how to handle stream concurrency when tools themselves make LLM calls, and how to persist multi-turn conversations with atomic jsonb appends instead of loading and rewriting the full thread."
+      },
+      {
+        "section": "conclusion",
+        "heading": "Try It",
+        "body": "PineForge is live at pine-forge.vercel.app. Try describing a strategy — something like \"RSI divergence on BTC 15-minute with a 2:1 risk-reward ratio\" — and see what comes out."
+      }
+    ]
+  },
+  {
+    "id": "spec-driven-development",
+    "title": "Spec-Driven, Not Vibe-Driven: How I Build Real Projects with AI",
+    "date": "2026-05-19",
+    "category": "Development",
+    "author": "Yordan Yordanov",
+    "tags": ["Spec-Driven Development", "AI", "Workflow", "Process"],
+    "content": [
+      {
+        "section": "intro",
+        "heading": "Where Vibe Coding Falls Apart",
+        "body": "When I started building with AI, I did what most people do — I described what I wanted, let the model generate code, and kept nudging it until things worked. That gets you surprisingly far on a weekend project. But the moment a project grows past a handful of features, vibe coding collapses. The AI forgets decisions you made three prompts ago, reintroduces bugs you already fixed, and quietly drifts away from your architecture because nothing is holding it to a plan. I learned this the hard way, watching a promising app turn into a tangle nobody — human or model — could reason about anymore."
+      },
+      {
+        "section": "what_it_is",
+        "heading": "What Spec-Driven Development Means to Me",
+        "body": "Spec-driven development is simple to state: write the specs before you write the code, and treat those specs as the source of truth for both you and the AI. Instead of holding the plan in my head and dribbling it out one prompt at a time, I write it down — what the product is, how it's structured, what the conventions are, what's been built, and what's next. The model doesn't get to improvise the architecture. It reads the specs, works within them, and updates the tracker when something ships. The specs are the contract; the code is just the current implementation of that contract."
+      },
+      {
+        "section": "context_files",
+        "heading": "The Six Files I Build Around",
+        "body": "Every serious project I work on now lives on a small set of context files. There's a project overview — what the product is, who it's for, and the boundaries it won't cross. An architecture file documents the system design and the invariants every change has to respect. A code-standards file fixes conventions and file structure so the codebase stays consistent no matter how many sessions it takes. An AI workflow rules file tells the model how to behave in the repo — read the specs first, don't drift, ask before touching the data contract. A progress tracker is the single source of truth for what's shipped and what's next. And a UI context file holds the design tokens and component patterns so the interface stays coherent. Six files, and together they keep a large project from collapsing under its own weight."
+      },
+      {
+        "section": "ai_contract",
+        "heading": "The Specs Are the AI's Contract",
+        "body": "The reason this works so well with AI is that a model is only as good as the context it's given. Drop it into a big codebase cold and it guesses. Hand it a clear set of specs and it stops guessing — it has the architecture, the conventions, and the history right there. I start most work sessions by pointing the model at the relevant spec files, and I end them by having it update the progress tracker. Because the rules are written down, the output is consistent across sessions and even across different models. The spec is what survives; the chat history is disposable."
+      },
+      {
+        "section": "results",
+        "heading": "What It Changed",
+        "body": "The clearest proof is PineForge. It went from a single-page generator to a sixty-eight-feature product with its own AI agent, and the only reason it didn't turn into spaghetti is that every phase was specced before a line of implementation was written. Each feature got its own small spec, the progress tracker stayed the source of truth, and the architecture file kept new features honest about the invariants. When I came back after a week away, I didn't have to reconstruct what I was thinking — the specs told me, and they told the AI too. Planning up front feels slower for the first hour. It is dramatically faster across the whole life of a project."
+      },
+      {
+        "section": "conclusion",
+        "heading": "Start Small",
+        "body": "You don't need six files to begin. Start with two: a short overview of what you're building, and a running progress tracker. Point your AI assistant at them before each session and have it keep them current. Once you feel how much steadier the work becomes, the rest of the files will earn their place naturally. Spec-driven development isn't bureaucracy — it's the difference between a project you can keep building on and one that quietly becomes unmaintainable."
+      }
+    ]
+  }
+]

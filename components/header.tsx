@@ -8,8 +8,9 @@ import { ScrollProgress } from "./scroll-progress";
 const navLinks = [
   { href: "#about", label: "About", sectionId: "about" },
   { href: "#projects", label: "Work", sectionId: "projects" },
-  { href: "#services", label: "Approach", sectionId: "services" },
+  { href: "#process", label: "Process", sectionId: "process" },
   { href: "#stack", label: "Stack", sectionId: "stack" },
+  { href: "/blog", label: "Blog", sectionId: null },
   { href: "#contact", label: "Contact", sectionId: "contact" },
 ];
 
@@ -103,10 +104,10 @@ export function Header() {
       </div>
 
       <div
-        className="mobile-menu overflow-hidden border-t border-border md:hidden"
+        className="mobile-menu absolute left-0 right-0 top-full overflow-hidden border-b border-border bg-background shadow-lg shadow-black/40 md:hidden"
         data-open={isMenuOpen}
       >
-        <nav className="flex flex-col gap-1 px-6 py-4" aria-label="Main mobile">
+        <nav className="flex flex-col gap-1 px-6 py-4 max-w-6xl mx-auto w-full" aria-label="Main mobile">
           {navLinks.map((link) => (
             <Link
               key={link.href}

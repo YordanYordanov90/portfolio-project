@@ -18,7 +18,7 @@ export function Hero() {
             Open to new opportunities — happy to build together
           </span>
           <p className="section-eyebrow text-primary">
-            Yordan Yordanov · Full-stack developer · security-minded
+            Yordan Yordanov · Full-stack developer · Plovdiv
           </p>
         </motion.div>
 
@@ -27,11 +27,11 @@ export function Hero() {
           variants={fadeUp}
           className="text-[clamp(2.75rem,8vw,5.5rem)] font-semibold leading-[0.95] tracking-tight"
         >
-          I ship software
+          Self-taught.
           <br />
-          <span className="text-muted-foreground">that holds up</span>
+          <span className="text-muted-foreground">Already shipping</span>
           <br />
-          under inspection.
+          real things.
         </motion.h1>
 
         <motion.p
@@ -39,8 +39,9 @@ export function Hero() {
           variants={fadeUp}
           className="max-w-md text-lg leading-relaxed text-muted-foreground"
         >
-          From interface polish to hardened backends — I care about the entire
-          stack, especially the parts users never see.
+          A full-stack developer building AI-powered apps with
+          Next.js. I came from QA, so I care a lot about how things break — and
+          how to keep them from breaking.
         </motion.p>
 
         <motion.div custom={3} variants={fadeUp} className="flex flex-wrap gap-4">

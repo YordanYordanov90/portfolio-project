@@ -25,32 +25,30 @@ interface PageProps {
 }
 
 export function generateStaticParams() {
-  return [{ id: articles.id }];
+  return articles.map((a) => ({ id: a.id }));
 }
 
 export async function generateMetadata({ params }: PageProps) {
   const { id } = await params;
-  
-  if (id !== articles.id) {
-    return {
-      title: "Article Not Found - Y.Yordanov",
-    };
+  const article = articles.find((a) => a.id === id);
+
+  if (!article) {
+    return { title: "Article Not Found - Y.Yordanov" };
   }
 
   return {
-    title: `${articles.title} - Y.Yordanov`,
-    description: articles.content[0].body.slice(0, 160),
+    title: `${article.title} - Y.Yordanov`,
+    description: article.content[0].body.slice(0, 160),
   };
 }
 
 export default async function ArticlePage({ params }: PageProps) {
   const { id } = await params;
+  const article: Article | undefined = articles.find((a) => a.id === id);
 
-  if (id !== articles.id) {
+  if (!article) {
     notFound();
   }
-
-  const article: Article = articles;
 
   const formattedDate = new Date(article.date).toLocaleDateString("en-US", {
     year: "numeric",

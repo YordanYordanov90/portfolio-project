@@ -30,13 +30,13 @@ export const PROJECTS = [
     link: "https://ghosty-ai.vercel.app/",
   },
   {
-    title: "Cod3mate",
+    title: "Finerel",
     description:
-      "A Telegram-first coding agent with a Next.js dashboard, exploring browser automation and agent workflows.",
-    tags: ["TypeScript", "Agents", "Playwright", "Next.js"],
-    image: "/projects/cod3mate-dashboard.png",
-    imageAlt: "Cod3mate dashboard",
-    link: "https://cod3mate-dashboard.vercel.app/",
+      "A relationship intelligence engine that reads overnight financial news and turns it into a structured map of company connections — partnerships, supply chains, investments — with a daily confidence-scored briefing before market open.",
+    tags: ["Next.js", "TypeScript", "Vercel AI SDK", "Neon", "Clerk"],
+    image: "/projects/finerel.png",
+    imageAlt: "Finerel",
+    link: "https://finerel.com/",
   },
   {
     title: "LeverCast AI",
@@ -44,7 +44,7 @@ export const PROJECTS = [
       "AI social media tool for drafting and scheduling content across platforms, built around AI generation pipelines.",
     tags: ["Next.js", "Drizzle", "Vercel AI SDK"],
     image: "/projects/levercast-ai.png",
-    imageAlt: "LeverCast AI",
+    imageAlt: "Finerel",
     link: "https://levercast-ai.vercel.app/",
   },
 ] as const;

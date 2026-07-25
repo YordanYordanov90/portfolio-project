@@ -1,5 +1,50 @@
 [
   {
+    "id": "three-ai-skills-that-improve-my-workflow",
+    "title": "Before the Code, After the Build: Three AI Skills That Improve My Workflow",
+    "date": "2026-07-25",
+    "category": "Development",
+    "author": "Yordan Yordanov",
+    "tags": ["AI Skills", "Workflow", "Next.js", "Frontend Design"],
+    "content": [
+      {
+        "section": "intro",
+        "heading": "A Skill for Each Stage",
+        "body": "I don't use AI skills as a replacement for knowing what I want to build. I use them to make the important parts of the process harder to skip. One skill challenges the idea before it becomes a specification, while two others help me inspect and polish the application after the main implementation is working. Together, they give my workflow a useful rhythm: question the plan, build from a clearer spec, then improve the engineering and the experience."
+      },
+      {
+        "section": "grill_me",
+        "heading": "Grill Me Before I Write the Spec",
+        "body": "The first skill I reach for is grill-me. I use it before implementation and even before I generate my spec-driven Markdown files. Instead of accepting the first version of an idea, the skill interviews me one question at a time, recommends an answer, and keeps going until the important branches of the decision tree are resolved. That pressure is valuable because vague product decisions are cheap before the spec exists and expensive once they have turned into routes, schemas, and components."
+      },
+      {
+        "section": "better_questions",
+        "heading": "Turning Assumptions Into Decisions",
+        "body": "What I like most about grill-me is that it creates productive friction. It asks who a feature is really for, what happens in edge cases, which tradeoffs I am willing to accept, and where the boundaries should be. If an answer already exists in the codebase, the agent should inspect the project instead of making me repeat it. By the time I create the project overview, architecture notes, or feature spec, I am no longer documenting a loose idea. I am writing down decisions that have already survived a serious round of questioning."
+      },
+      {
+        "section": "nextjs_developer",
+        "heading": "Next.js Developer for the Engineering Pass",
+        "body": "Once the feature is implemented, I use the Next.js Developer skill as a focused engineering review. It brings the App Router details back into view: Server Components by default, client boundaries kept close to the interactive leaves, explicit caching and revalidation, loading and error states, metadata, image optimization, and a clean production build. These are easy details to overlook when the feature itself is demanding all of my attention. The skill helps me turn code that works into a Next.js application that is structured, performant, and ready to deploy."
+      },
+      {
+        "section": "frontend_design",
+        "heading": "Frontend Design for the Experience Pass",
+        "body": "The Frontend Design skill handles a different kind of polish. I use it when the application is functional but the interface still feels generic, inconsistent, or unfinished. It pushes the work toward a deliberate visual direction through typography, color, spacing, composition, motion, and small textural details. More importantly, it asks whether those choices belong to this product instead of copying the usual AI-generated gradients, layouts, and type treatments. The goal is not decoration. It is an interface with a clear identity where the visual decisions support what the user is trying to do."
+      },
+      {
+        "section": "polish_loop",
+        "heading": "Two Kinds of Polish",
+        "body": "I think of the final two skills as complementary review passes. Next.js Developer looks beneath the interface and asks whether the application uses the framework well. Frontend Design looks at the experience and asks whether the product feels intentional. I may move between them more than once: an engineering change can affect the interaction, and a design decision can reveal that a component boundary needs to change. Keeping the concerns distinct gives each review a sharper purpose without separating design from implementation."
+      },
+      {
+        "section": "conclusion",
+        "heading": "Skills Work Best as Checkpoints",
+        "body": "The biggest lesson for me is that a skill becomes useful when it has a clear place in the workflow. Grill-me belongs before my spec-driven files because it helps me decide what those files should say. Next.js Developer and Frontend Design belong near the end because they help me see what the first implementation missed. None of them removes the need for judgment. They create checkpoints where the AI is asked to challenge, inspect, and refine the work instead of simply generating more of it."
+      }
+    ]
+  },
+  {
     "id": "my-nextjs-ai-journey",
     "title": "From Idea to Intelligence: Why I Build AI-Powered Apps with Next.js",
     "date": "2026-03-17",

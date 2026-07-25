@@ -45,6 +45,51 @@
     ]
   },
   {
+    "id": "finerel-ai-relationship-intelligence",
+    "title": "Finerel — Turning Overnight Financial News Into a Relationship Map",
+    "date": "2026-07-25",
+    "category": "Development",
+    "author": "Yordan Yordanov",
+    "tags": ["AI", "Fintech", "Data", "Next.js", "Knowledge Graphs"],
+    "content": [
+      {
+        "section": "intro",
+        "heading": "The Signal Hidden Between the Headlines",
+        "body": "Financial news rarely matters in isolation. A partnership announcement can change a supplier's outlook, an investment can reveal a strategic direction, and a new contract can connect companies that were previously just names on separate watchlists. Finerel is the project I built to make those relationships easier to see. It reads overnight financial news and turns it into a structured map of company connections, ready as a confidence-scored briefing before the market opens."
+      },
+      {
+        "section": "problem",
+        "heading": "Why a News Feed Is Not Enough",
+        "body": "A normal news feed gives you a stream of articles to read, but it leaves the hardest part to the reader: deciding which companies are connected and why that connection matters. I wanted Finerel to move one step closer to that decision. Instead of asking someone to remember every company, filter every headline, and manually connect the dots, the product extracts the relationships inside the stories and presents them as a research starting point."
+      },
+      {
+        "section": "relationship_map",
+        "heading": "From Articles to Relationships",
+        "body": "The central idea is to treat a company relationship as a first-class piece of information. Finerel looks for signals such as partnerships, supply-chain links, and investments, then organizes them into a map rather than burying them in paragraphs. Each connection carries context and a confidence score, so the output is not pretending that every extracted relationship is equally certain. The map gives the reader both the shape of the network and a way to decide which connections deserve a closer look."
+      },
+      {
+        "section": "daily_briefing",
+        "heading": "A Briefing Built for the Morning",
+        "body": "Timing is part of the product. The point is not to create another archive of everything that happened yesterday; it is to give the reader a focused briefing before the trading day begins. The daily flow turns a noisy overnight information window into a smaller set of relationships worth investigating. That constraint shaped the experience around relevance, confidence, and quick scanning instead of endless scrolling."
+      },
+      {
+        "section": "architecture",
+        "heading": "Building the Intelligence Layer",
+        "body": "Finerel combines a Next.js application with an AI processing pipeline and structured data models for companies, sources, and relationship types. The important design decision was to keep the AI output structured from the start. A free-form summary can sound convincing while remaining difficult to query or compare. A typed relationship record can be scored, displayed on a graph, traced back to its source, and used in the next briefing. That structure makes the product more useful than a chatbot sitting on top of a news feed."
+      },
+      {
+        "section": "learnings",
+        "heading": "What I Learned",
+        "body": "This project changed how I think about AI products in data-heavy domains. The impressive part is not simply asking a model to summarize an article. The real work is deciding what should become data, preserving enough evidence to make the result trustworthy, and designing the interface so uncertainty remains visible. Finerel also reminded me that a good product can be narrow. A focused morning briefing with a clear relationship model is more actionable than an oversized dashboard that tries to answer every market question at once."
+      },
+      {
+        "section": "conclusion",
+        "heading": "A Better Way to Read the Market",
+        "body": "Finerel is my experiment in making financial research more connected. It does not try to replace judgment or predict prices. It gives that judgment a better starting point: the companies, relationships, evidence, and confidence levels hiding inside the overnight news cycle. The result is a calmer way to begin the day and a clearer view of how one company's story can become another company's signal."
+      }
+    ]
+  },
+  {
     "id": "my-nextjs-ai-journey",
     "title": "From Idea to Intelligence: Why I Build AI-Powered Apps with Next.js",
     "date": "2026-03-17",

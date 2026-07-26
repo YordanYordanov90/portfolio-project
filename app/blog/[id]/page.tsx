@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 interface ArticleContent {
   section: string;
   heading: string;
+  link?: string;
   body: string;
 }
 
@@ -105,7 +106,21 @@ export default async function ArticlePage({ params }: PageProps) {
             {article.content.map((section, idx) => (
               <section key={idx} className="group">
                 <h2 className="text-2xl font-semibold tracking-tight text-foreground mb-4 group-hover:text-primary transition-colors">
-                  {section.heading}
+                  {section.link ? (
+                    <a
+                      href={section.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 underline decoration-border underline-offset-4 transition-colors hover:decoration-primary"
+                    >
+                      {section.heading}
+                      <span className="text-base font-normal" aria-hidden="true">
+                        ↗
+                      </span>
+                    </a>
+                  ) : (
+                    section.heading
+                  )}
                 </h2>
                 <p className="text-muted-foreground leading-relaxed text-lg">
                   {section.body}

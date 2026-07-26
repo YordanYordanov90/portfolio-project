@@ -15,6 +15,7 @@
       {
         "section": "grill_me",
         "heading": "Grill Me Before I Write the Spec",
+        "link": "https://www.aihero.dev/skills-grill-me",
         "body": "The first skill I reach for is grill-me. I use it before implementation and even before I generate my spec-driven Markdown files. Instead of accepting the first version of an idea, the skill interviews me one question at a time, recommends an answer, and keeps going until the important branches of the decision tree are resolved. That pressure is valuable because vague product decisions are cheap before the spec exists and expensive once they have turned into routes, schemas, and components."
       },
       {
@@ -25,11 +26,13 @@
       {
         "section": "nextjs_developer",
         "heading": "Next.js Developer for the Engineering Pass",
+        "link": "https://www.skills.sh/jeffallan/claude-skills/nextjs-developer",
         "body": "Once the feature is implemented, I use the Next.js Developer skill as a focused engineering review. It brings the App Router details back into view: Server Components by default, client boundaries kept close to the interactive leaves, explicit caching and revalidation, loading and error states, metadata, image optimization, and a clean production build. These are easy details to overlook when the feature itself is demanding all of my attention. The skill helps me turn code that works into a Next.js application that is structured, performant, and ready to deploy."
       },
       {
         "section": "frontend_design",
         "heading": "Frontend Design for the Experience Pass",
+        "link": "https://www.skills.sh/anthropics/skills/frontend-design",
         "body": "The Frontend Design skill handles a different kind of polish. I use it when the application is functional but the interface still feels generic, inconsistent, or unfinished. It pushes the work toward a deliberate visual direction through typography, color, spacing, composition, motion, and small textural details. More importantly, it asks whether those choices belong to this product instead of copying the usual AI-generated gradients, layouts, and type treatments. The goal is not decoration. It is an interface with a clear identity where the visual decisions support what the user is trying to do."
       },
       {

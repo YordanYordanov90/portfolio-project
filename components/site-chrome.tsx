@@ -13,7 +13,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="relative min-h-screen">
+    <div className="site-shell relative min-h-screen">
       <Header />
       <div className="relative z-[1] pt-[var(--header-height)]">{children}</div>
       <Footer />

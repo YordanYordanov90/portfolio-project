@@ -18,17 +18,18 @@ const levelColor: Record<string, string> = {
 };
 
 export function AuditLog() {
-  const [visibleCount, setVisibleCount] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(() =>
+    typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ? LOG_LINES.length
+      : 0,
+  );
   const complete = visibleCount >= LOG_LINES.length;
 
   useEffect(() => {
     if (complete) return;
 
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReduced) {
-      setVisibleCount(LOG_LINES.length);
-      return;
-    }
+    if (prefersReduced) return;
 
     const timer = setTimeout(() => setVisibleCount((c) => c + 1), 480);
     return () => clearTimeout(timer);

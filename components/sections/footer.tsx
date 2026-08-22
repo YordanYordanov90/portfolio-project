@@ -135,8 +135,7 @@ export function Footer() {
       <SectionWrapper id="contact" className="mx-auto max-w-6xl px-6 py-16 md:py-20">
       <div className="grid items-start gap-10 md:grid-cols-2 md:gap-16">
         <div className="flex flex-col gap-3 text-center md:text-left">
-          <p className="section-eyebrow">contact</p>
-          <h2 className="text-4xl font-semibold tracking-tight md:text-5xl">Let&apos;s talk</h2>
+          <h2 className="text-4xl font-semibold tracking-tight md:text-5xl">Let&apos;s talk about the work.</h2>
           <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
             Open to conversations about AI integration, web security, or Next.js
             architecture.
@@ -150,7 +149,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="social-link pressable focus-ring inline-flex h-10 w-10 items-center justify-center rounded-sm border border-border bg-card/40 text-muted-foreground backdrop-blur-md"
+                className="social-link pressable focus-ring inline-flex h-10 w-10 items-center justify-center rounded-sm border border-border bg-card text-muted-foreground"
               >
                 <Icon className="h-4 w-4" />
               </Link>
@@ -346,7 +345,7 @@ function FloatingField({
             placeholder=" "
             aria-invalid={error ? true : undefined}
             aria-describedby={hintOrError ? describedById : undefined}
-            className={`${base} ${border} resize-none h-[140px]`}
+            className={`${base} ${border} resize-y min-h-[140px]`}
           />
         ) : (
           <input

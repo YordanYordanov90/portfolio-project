@@ -6,9 +6,9 @@ import { Menu, X } from "lucide-react";
 import { ScrollProgress } from "./scroll-progress";
 
 const navLinks = [
-  { href: "#about", label: "About", sectionId: "about" },
   { href: "#projects", label: "Work", sectionId: "projects" },
   { href: "#process", label: "Process", sectionId: "process" },
+  { href: "#about", label: "About", sectionId: "about" },
   { href: "#stack", label: "Stack", sectionId: "stack" },
   { href: "/blog", label: "Blog", sectionId: null },
   { href: "#contact", label: "Contact", sectionId: "contact" },
@@ -57,29 +57,22 @@ export function Header() {
 
   return (
     <header
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 50,
-        width: "100%",
-      }}
-      className={`transition-[background-color,border-color,backdrop-filter] duration-200 ${
+      className={`site-header ${
         scrolled
-          ? "border-b border-border bg-card/80 backdrop-blur-md"
-          : "border-b border-border/60 bg-card/70 backdrop-blur-md"
+          ? "is-scrolled"
+          : ""
       }`}
     >
-      <div className="flex items-center justify-between px-6 py-4 max-w-6xl mx-auto w-full">
+      <div className="site-header__inner flex items-center justify-between px-6 py-4 max-w-6xl mx-auto w-full">
         <Link
           href="/"
-          className="font-mono text-xs text-muted-foreground link-subtle pressable focus-ring"
+          className="wordmark link-subtle pressable focus-ring"
         >
-          Y.Yordanov
+          <span className="wordmark__mark" aria-hidden="true">Y</span>
+          <span>Yordanov</span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-8" aria-label="Main">
+        <nav className="hidden md:flex items-center gap-6" aria-label="Main">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -91,6 +84,14 @@ export function Header() {
             </Link>
           ))}
         </nav>
+
+        <a
+          href="/cv.pdf"
+          download
+          className="header-cv focus-ring hidden md:inline-flex"
+        >
+          Download CV
+        </a>
 
         <button
           type="button"
@@ -119,6 +120,9 @@ export function Header() {
               {link.label}
             </Link>
           ))}
+          <a href="/cv.pdf" download className="nav-link pressable focus-ring py-2 text-sm text-primary">
+            Download CV
+          </a>
         </nav>
       </div>
 

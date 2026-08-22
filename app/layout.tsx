@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Bricolage_Grotesque, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SiteChrome } from "@/components/site-chrome";
 
@@ -11,6 +11,12 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const bricolage = Bricolage_Grotesque({
+  variable: "--font-bricolage",
+  subsets: ["latin"],
+  display: "swap",
 });
 
 export const viewport: Viewport = {
@@ -31,7 +37,14 @@ export const metadata: Metadata = {
     url: BASE_URL,
     siteName: "Yordan Yordanov",
     type: "website",
-    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "Yordan Yordanov — Full-Stack Developer" }],
+    images: [
+      {
+        url: "/og.jpg",
+        width: 768,
+        height: 1152,
+        alt: "Yordan Yordanov — Full-Stack Developer",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -51,7 +64,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-background text-foreground`}
+        className={`${bricolage.variable} ${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-background text-foreground`}
       >
         <SiteChrome>{children}</SiteChrome>
       </body>

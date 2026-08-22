@@ -40,7 +40,7 @@ export default function BlogPage() {
 
         <div className="flex flex-col gap-8">
           {posts.map((post, idx) => (
-            <Link key={idx} href={post.slug} className="group flex flex-col gap-2 rounded-2xl p-6 md:p-8 border border-border bg-card/50 hover:bg-card hover:shadow-sm transition-all">
+            <Link key={idx} href={post.slug} className="group flex flex-col gap-2 rounded-2xl p-6 md:p-8 border border-border bg-card/50 hover:bg-card hover:border-primary/40 transition-[background-color,border-color,transform] duration-200">
               <span className="text-sm font-medium text-muted-foreground">{post.date}</span>
               <h2 className="text-2xl font-semibold tracking-tight text-foreground group-hover:text-primary transition-colors">
                 {post.title}
@@ -49,7 +49,7 @@ export default function BlogPage() {
                 {post.excerpt}
               </p>
               <div className="mt-4 text-sm font-semibold text-primary inline-flex items-center">
-                Read article <span className="ml-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">→</span>
+                Read article <span className="ml-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-[opacity,transform] duration-200">→</span>
               </div>
             </Link>
           ))}

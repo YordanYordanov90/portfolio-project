@@ -1,7 +1,6 @@
 "use client";
 
 import { SectionWrapper, AnimatedItem } from "@/components/section-wrapper";
-import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
@@ -9,106 +8,146 @@ import { PROJECTS } from "@/lib/constants";
 
 type Project = (typeof PROJECTS)[number];
 
-function ProjectCard({ project }: { project: Project }) {
+function ProjectActions({ project, compact = false }: { project: Project; compact?: boolean }) {
   return (
-    <AnimatedItem>
+    <div className={`project-actions ${compact ? "project-actions--compact" : ""}`}>
       <Link
         href={project.link}
         target="_blank"
         rel="noopener noreferrer"
         prefetch={false}
-        aria-label={`Open ${project.title}`}
-        className="group block"
+        className={compact ? "project-action" : "btn-primary focus-ring"}
       >
-        <div className="flex flex-col gap-6 cursor-pointer md:max-w-[480px]">
-          <motion.div
-            whileHover={{ y: -4 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="relative overflow-hidden rounded-[2.5rem] aspect-4/3 border border-white/10 shadow-[0_0_0_1px_rgba(255,255,255,0.02)] transition-all duration-500 group-hover:border-white/20 group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.3)] bg-stone-900/50"
-          >
-            <Image
-              src={project.image}
-              alt={project.imageAlt}
-              fill
-              className="object-cover transition-transform duration-700 ease-out will-change-transform group-hover:scale-105"
-              sizes="(max-width: 768px) 100vw, 480px"
-              quality={85}
-            />
-
-            <div className="absolute inset-0 bg-black/10" aria-hidden />
-            <div
-              className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500"
-              aria-hidden
-            />
-
-            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500">
-              <div className="bg-white/10 backdrop-blur-sm rounded-full p-4 transform scale-75 group-hover:scale-100 transition-transform duration-500">
-                <ExternalLink className="h-6 w-6 text-white" />
-              </div>
-            </div>
-          </motion.div>
-
-          <div className="flex flex-col items-center text-center px-2">
-            <h3 className="text-xl font-bold tracking-tight text-foreground leading-tight group-hover:text-primary transition-colors duration-300">
-              {project.title}
-            </h3>
-            <p className="text-sm text-muted-foreground mt-1.5 leading-snug">
-              {project.description}
-            </p>
-            <div className="mt-3 flex flex-wrap justify-center gap-1.5">
-              {project.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="font-mono text-[11px] px-2 py-0.5 rounded-sm border border-border bg-card/40 text-muted-foreground"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-            <div className="mt-3 text-sm font-semibold text-primary/0 group-hover:text-primary transition-all duration-300 flex items-center gap-1">
-              Visit site <ExternalLink className="h-3 w-3" />
-            </div>
-          </div>
-        </div>
+        View live product <ExternalLink className="h-3.5 w-3.5" />
       </Link>
+    </div>
+  );
+}
+
+function ProjectMedia({ project, featured = false }: { project: Project; featured?: boolean }) {
+  return (
+    <a
+      href={project.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`Open ${project.title}`}
+      className="project-media-link focus-ring"
+    >
+      <div className={featured ? "project-featured__media" : "project-supporting__media"}>
+        <Image
+          src={project.image}
+          alt={project.imageAlt}
+          fill
+          priority={featured}
+          className="project-image object-cover"
+          sizes={featured ? "(max-width: 768px) 100vw, 680px" : "(max-width: 768px) 100vw, 360px"}
+          quality={85}
+        />
+        <div className="project-media__veil" aria-hidden="true" />
+      </div>
+    </a>
+  );
+}
+
+function EvidenceList({ project }: { project: Project }) {
+  return (
+    <ul className="project-evidence" aria-label={`${project.title} evidence`}>
+      {project.evidence.map((item) => (
+        <li key={item}>{item}</li>
+      ))}
+    </ul>
+  );
+}
+
+function FeaturedProject({ project, index }: { project: Project; index: number }) {
+  return (
+    <AnimatedItem>
+      <article className={`project-featured ${index % 2 === 1 ? "project-featured--reverse" : ""}`}>
+        <ProjectMedia project={project} featured />
+
+        <div className="project-featured__body">
+          <div className="project-meta">
+            <span>{project.status}</span>
+            <span aria-hidden="true">/</span>
+            <span>{project.focus}</span>
+          </div>
+
+          <h3 className="project-featured__title">{project.title}</h3>
+          <p className="project-featured__summary">{project.summary}</p>
+          <p className="project-featured__description">{project.description}</p>
+
+          <EvidenceList project={project} />
+
+          <div className="project-tags" aria-label={`${project.title} technology stack`}>
+            {project.tags.map((tag) => (
+              <span key={tag}>{tag}</span>
+            ))}
+          </div>
+
+          <ProjectActions project={project} />
+        </div>
+      </article>
+    </AnimatedItem>
+  );
+}
+
+function SupportingProject({ project }: { project: Project }) {
+  return (
+    <AnimatedItem>
+      <article className="project-supporting">
+        <ProjectMedia project={project} />
+
+        <div className="project-supporting__body">
+          <div className="project-meta">
+            <span>{project.status}</span>
+            <span aria-hidden="true">/</span>
+            <span>{project.focus}</span>
+          </div>
+          <div className="project-supporting__heading">
+            <h3>{project.title}</h3>
+            <p>{project.summary}</p>
+          </div>
+          <EvidenceList project={project} />
+          <ProjectActions project={project} compact />
+        </div>
+      </article>
     </AnimatedItem>
   );
 }
 
 export function Projects() {
+  const featuredProjects = PROJECTS.filter((project) => project.featured);
+  const supportingProjects = PROJECTS.filter((project) => !project.featured);
+
   return (
     <SectionWrapper
       id="projects"
-      staggerChildren
-      className="section-anchor py-16 md:py-20 max-w-6xl mx-auto w-full"
+      className="section-anchor py-16 md:py-24 max-w-6xl mx-auto w-full"
     >
-      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-x-12 gap-y-6 mb-10 md:mb-12 text-left">
+      <div className="projects-heading mb-12 md:mb-16">
         <AnimatedItem>
-          <div className="flex flex-col gap-4">
-            <span className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
-              Featured Work
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
-              Selected Projects
-            </h2>
-            <p className="text-muted-foreground max-w-xl text-lg">
-              Building and breaking things to learn the &apos;how&apos; behind
-              secure AI-powered apps and modern web design
-            </p>
-          </div>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight">Selected work</h2>
+          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+            Products that show how I think, build, test, and ship.
+          </p>
         </AnimatedItem>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-12 items-start">
-        <div className="flex flex-col gap-14 md:mt-16">
-          {PROJECTS.filter((_, i) => i % 2 === 0).map((project) => (
-            <ProjectCard key={project.title} project={project} />
-          ))}
+      <div className="projects-featured">
+        {featuredProjects.map((project, index) => (
+          <FeaturedProject key={project.title} project={project} index={index} />
+        ))}
+      </div>
+
+      <div className="projects-supporting">
+        <div className="projects-supporting__heading">
+          <h3>More shipped work</h3>
+          <p>Smaller products, focused experiments, and the same care for the details.</p>
         </div>
 
-        <div className="flex flex-col gap-14">
-          {PROJECTS.filter((_, i) => i % 2 !== 0).map((project) => (
-            <ProjectCard key={project.title} project={project} />
+        <div className="projects-supporting__grid">
+          {supportingProjects.map((project) => (
+            <SupportingProject key={project.title} project={project} />
           ))}
         </div>
       </div>

@@ -1,8 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { scrollReveal } from "@/lib/motion";
 
 const REPO = "https://github.com/YordanYordanov90/PineForge-ai-trading/blob/main/context";
 
@@ -36,15 +34,7 @@ const contextFiles = [
 export function Process() {
   return (
     <section id="process" className="section-anchor py-16 md:py-20">
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-40px" }}
-        variants={scrollReveal}
-        custom={0}
-        className="mb-8"
-      >
-        <p className="section-eyebrow mb-4">how I ship</p>
+      <div className="process-intro mb-8">
         <h2 className="max-w-2xl text-4xl font-semibold tracking-tight md:text-5xl">
           Spec-driven, not vibe-driven.
         </h2>
@@ -54,21 +44,16 @@ export function Process() {
           planned before they get built, and nothing drifts. On PineForge, six
           files keep a 68-feature product coherent.
         </p>
-      </motion.div>
+      </div>
 
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="process-grid grid gap-3 sm:grid-cols-2 lg:grid-cols-[1.2fr_1fr_0.8fr]">
         {contextFiles.map((file, i) => (
-          <motion.a
+          <a
             key={file.name}
             href={`${REPO}/${file.name}`}
             target="_blank"
             rel="noopener noreferrer"
-            custom={i + 1}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-40px" }}
-            variants={scrollReveal}
-            className="group pressable focus-ring rounded-sm border border-border bg-card p-5 transition-colors hover:border-primary/40 hover:bg-card/80"
+            className={`process-item group pressable focus-ring rounded-sm border border-border bg-card p-5 ${i % 2 === 0 ? "process-item--tall" : ""}`}
           >
             <span className="flex items-center justify-between gap-2 font-mono text-sm text-primary">
               <span className="underline-offset-4 group-hover:underline">{file.name}</span>
@@ -77,7 +62,7 @@ export function Process() {
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
               {file.body}
             </p>
-          </motion.a>
+          </a>
         ))}
       </div>
     </section>

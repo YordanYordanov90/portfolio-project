@@ -1,5 +1,61 @@
 [
   {
+    "id": "ai-spec-blueprint-system-definition-layer",
+    "title": "AI Spec Blueprint — Building the Architecture Before the Agent Writes Code",
+    "date": "2026-08-22",
+    "category": "Development",
+    "author": "Yordan Yordanov",
+    "tags": ["AI Agents", "Spec-Driven Development", "TypeScript", "Architecture", "Guardrails"],
+    "content": [
+      {
+        "section": "intro",
+        "heading": "Chat History Is Not Project Architecture",
+        "body": "AI coding agents can generate implementation quickly, but speed does not solve ambiguity. AI Spec Blueprint is the project I built to define the product, architecture, schemas, guardrails, and scope before the first line of code is written. It turns an early idea into reviewed decisions and durable repository context, so the coding agent works inside an architecture instead of inventing one as the conversation moves."
+      },
+      {
+        "section": "problem",
+        "heading": "Why the Conversation Is Not Enough",
+        "body": "A chat can explain what a project should become, but the conversation is temporary and easy to reinterpret. Important choices get scattered across messages, unresolved questions look like decisions, and a new session can quietly drift away from the original architecture. I wanted a stronger boundary between product thinking and implementation: a place where assumptions are challenged, decisions are approved, and the result survives after the chat window is gone."
+      },
+      {
+        "section": "workflow",
+        "heading": "From an Idea to Controlled Implementation",
+        "body": "The workflow has six stages. Describe captures the raw project idea. Discover uses a focused Grill Me process to expose missing decisions. Architect turns the answers into reviewed system choices. Guard converts those choices into enforceable rules. Generate produces durable repository context. Build is where the coding agent finally starts implementation. The order matters because each stage reduces ambiguity before it can become code."
+      },
+      {
+        "section": "human_review",
+        "heading": "Human Approval Stays in the Loop",
+        "body": "AI Spec Blueprint is designed around human review rather than automatic agreement. A decision can remain unresolved, an architecture can stay under review, and a guardrail can be marked incomplete instead of being presented as finished. That visible uncertainty is useful. It creates a checkpoint where I can correct the system definition before a coding agent turns a weak assumption into routes, schemas, dependencies, and migrations."
+      },
+      {
+        "section": "blueprint_core",
+        "heading": "One Blueprint Core for the Web and CLI",
+        "body": "The web experience and CLI share the same Blueprint Core: schemas, guardrails, validation, and deterministic generators. I did not want the browser workflow to produce one interpretation while the command line produced another. Keeping the rules and generators in one core means both interfaces work from the same structured project definition and produce the same kind of repository context."
+      },
+      {
+        "section": "guardrails",
+        "heading": "Guardrails That Explain What, Why, and How",
+        "body": "A useful guardrail needs more than a short instruction. It should say what must be true, why the rule exists, how serious it is, and where it is enforced. The project includes patterns such as keeping AI provider credentials and model calls on the server, or limiting implementation to one active feature. These rules are meant to guide actual work through repository context, tests, build boundaries, and review—not sit in a document that nobody consults."
+      },
+      {
+        "section": "durable_context",
+        "heading": "Context That Survives the Conversation",
+        "body": "Once the decisions are approved, deterministic TypeScript renderers turn the structured blueprint into a stable Markdown package. The output includes AGENTS.md and context files for the project overview, architecture, schemas, code standards, UI context, AI workflow rules, and progress tracking. The package can be exported or generated from the CLI, then committed beside the code so future agents and future sessions read the same source of truth."
+      },
+      {
+        "section": "learnings",
+        "heading": "What Building It Taught Me",
+        "body": "The main lesson was that better AI-assisted development is not only a prompting problem. It is a systems-design problem. The agent needs durable decisions, explicit boundaries, visible uncertainty, and context that can be validated and regenerated. Structured data is useful for review and tooling; Markdown is useful inside the repository. Treating both as views of the same blueprint made the workflow more reliable than trying to make one long prompt carry the entire project."
+      },
+      {
+        "section": "conclusion",
+        "heading": "Try AI Spec Blueprint",
+        "link": "https://ai-spec-blueprint.vercel.app/",
+        "body": "AI Spec Blueprint is live and ready to explore. Start with an early project idea, work through the decisions, and inspect the context package before implementation begins. The goal is simple: build the environment around the coding agent first, so the code starts from an architecture that has already been questioned, reviewed, and made durable."
+      }
+    ]
+  },
+  {
     "id": "three-ai-skills-that-improve-my-workflow",
     "title": "Before the Code, After the Build: Three AI Skills That Improve My Workflow",
     "date": "2026-07-25",

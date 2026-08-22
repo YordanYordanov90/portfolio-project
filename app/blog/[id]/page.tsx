@@ -3,6 +3,9 @@ import Link from "next/link";
 import { ArrowLeft, Calendar, User, Tag } from "lucide-react";
 import articles from "@/articles/articles.json";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+
+const BASE_URL = "https://yordanov.vercel.app";
 
 interface ArticleContent {
   section: string;
@@ -29,17 +32,40 @@ export function generateStaticParams() {
   return articles.map((a) => ({ id: a.id }));
 }
 
-export async function generateMetadata({ params }: PageProps) {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
   const article = articles.find((a) => a.id === id);
 
   if (!article) {
-    return { title: "Article Not Found - Y.Yordanov" };
+    return { title: "Article Not Found — Yordan Yordanov" };
   }
 
+  const title = `${article.title} — Yordan Yordanov`;
+  const description = article.content[0].body.slice(0, 160);
+
   return {
-    title: `${article.title} - Y.Yordanov`,
-    description: article.content[0].body.slice(0, 160),
+    title,
+    description,
+    alternates: {
+      canonical: `/blog/${article.id}`,
+    },
+    openGraph: {
+      title,
+      description,
+      url: `${BASE_URL}/blog/${article.id}`,
+      siteName: "Yordan Yordanov",
+      type: "article",
+      publishedTime: article.date,
+      authors: [article.author],
+      tags: article.tags,
+      images: ["/og.jpg"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["/og.jpg"],
+    },
   };
 }
 

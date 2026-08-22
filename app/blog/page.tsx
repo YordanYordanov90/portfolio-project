@@ -2,11 +2,34 @@ import { SectionWrapper } from "@/components/section-wrapper";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import articles from "@/articles/articles.json";
+import type { Metadata } from "next";
 
-export const metadata = {
-  title: "Blog - Y.Yordanov",
+export const metadata: Metadata = {
+  title: "Blog — Yordan Yordanov",
   description: "Writing about AI, Security, and Full-Stack Development.",
+  alternates: {
+    canonical: "/blog",
+  },
+  openGraph: {
+    title: "Blog — Yordan Yordanov",
+    description: "Writing about AI, Security, and Full-Stack Development.",
+    url: "/blog",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog — Yordan Yordanov",
+    description: "Writing about AI, Security, and Full-Stack Development.",
+    images: ["/og.jpg"],
+  },
 };
+
+function getExcerpt(body: string) {
+  const normalized = body.replace(/\s+/g, " ").trim();
+  return normalized.length > 220
+    ? `${normalized.slice(0, 217).trimEnd()}…`
+    : normalized;
+}
 
 export default function BlogPage() {
   const posts = [...articles]
@@ -18,7 +41,7 @@ export default function BlogPage() {
       month: "long",
       day: "numeric",
     }),
-    excerpt: article.content[0].body,
+    excerpt: getExcerpt(article.content[0].body),
     slug: `/blog/${article.id}`,
   }));
 
@@ -39,13 +62,13 @@ export default function BlogPage() {
         </div>
 
         <div className="flex flex-col gap-8">
-          {posts.map((post, idx) => (
-            <Link key={idx} href={post.slug} className="group flex flex-col gap-2 rounded-2xl p-6 md:p-8 border border-border bg-card/50 hover:bg-card hover:border-primary/40 transition-[background-color,border-color,transform] duration-200">
+          {posts.map((post) => (
+            <Link key={post.slug} href={post.slug} className="group flex flex-col gap-2 rounded-2xl p-6 md:p-8 border border-border bg-card/50 hover:bg-card hover:border-primary/40 transition-[background-color,border-color,transform] duration-200">
               <span className="text-sm font-medium text-muted-foreground">{post.date}</span>
               <h2 className="text-2xl font-semibold tracking-tight text-foreground group-hover:text-primary transition-colors">
                 {post.title}
               </h2>
-              <p className="text-muted-foreground mt-2 leading-relaxed">
+              <p className="text-muted-foreground mt-2 leading-relaxed line-clamp-4">
                 {post.excerpt}
               </p>
               <div className="mt-4 text-sm font-semibold text-primary inline-flex items-center">

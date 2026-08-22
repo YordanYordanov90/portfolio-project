@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 const proofPoints = [
-  { value: "4", label: "live products in the portfolio" },
+  { value: "5", label: "live products in the portfolio" },
   { value: "QA", label: "test discipline carried into every build" },
   { value: "AI", label: "where it earns its place in the product" },
 ];

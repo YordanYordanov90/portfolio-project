@@ -33,7 +33,7 @@ export function Hero() {
         </div>
 
         <p className="hero-availability">
-          <span aria-hidden="true">Available</span> for new opportunities
+          <span>Available</span> for new opportunities
         </p>
       </div>
 

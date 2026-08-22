@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Download } from "lucide-react";
-import { PROFILE_IMAGE, RESUME_PATH } from "@/lib/constants";
+import { PROFILE_IMAGE } from "@/lib/constants";
 
 export function About() {
   return (
@@ -17,7 +16,6 @@ export function About() {
               fill
               className="object-cover"
               sizes="(max-width: 768px) 280px, 280px"
-              priority
             />
           </div>
         </div>
@@ -41,16 +39,6 @@ export function About() {
           </div>
 
           <div className="flex flex-wrap justify-center gap-4 md:justify-start">
-            <Link
-              href={RESUME_PATH}
-              target="_blank"
-              rel="noopener noreferrer"
-              download
-              className="btn-primary focus-ring inline-flex items-center gap-2"
-            >
-              <Download className="h-4 w-4" />
-              Download CV
-            </Link>
             <Link href="#contact" className="btn-secondary focus-ring">
               Get in touch
             </Link>

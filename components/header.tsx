@@ -55,6 +55,19 @@ export function Header() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (!isMenuOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isMenuOpen]);
+
   return (
     <header
       className={`site-header ${
@@ -107,6 +120,8 @@ export function Header() {
       <div
         className="mobile-menu absolute left-0 right-0 top-full overflow-hidden border-b border-border bg-background shadow-lg shadow-black/40 md:hidden"
         data-open={isMenuOpen}
+        aria-hidden={!isMenuOpen}
+        inert={!isMenuOpen ? true : undefined}
       >
         <nav className="flex flex-col gap-1 px-6 py-4 max-w-6xl mx-auto w-full" aria-label="Main mobile">
           {navLinks.map((link) => (

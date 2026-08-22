@@ -2,10 +2,20 @@ import { SectionWrapper } from "@/components/section-wrapper";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import articles from "@/articles/articles.json";
+import type { Metadata } from "next";
 
-export const metadata = {
-  title: "Blog - Y.Yordanov",
+export const metadata: Metadata = {
+  title: "Blog — Yordan Yordanov",
   description: "Writing about AI, Security, and Full-Stack Development.",
+  alternates: {
+    canonical: "/blog",
+  },
+  openGraph: {
+    title: "Blog — Yordan Yordanov",
+    description: "Writing about AI, Security, and Full-Stack Development.",
+    url: "/blog",
+    type: "website",
+  },
 };
 
 export default function BlogPage() {
@@ -39,8 +49,8 @@ export default function BlogPage() {
         </div>
 
         <div className="flex flex-col gap-8">
-          {posts.map((post, idx) => (
-            <Link key={idx} href={post.slug} className="group flex flex-col gap-2 rounded-2xl p-6 md:p-8 border border-border bg-card/50 hover:bg-card hover:border-primary/40 transition-[background-color,border-color,transform] duration-200">
+          {posts.map((post) => (
+            <Link key={post.slug} href={post.slug} className="group flex flex-col gap-2 rounded-2xl p-6 md:p-8 border border-border bg-card/50 hover:bg-card hover:border-primary/40 transition-[background-color,border-color,transform] duration-200">
               <span className="text-sm font-medium text-muted-foreground">{post.date}</span>
               <h2 className="text-2xl font-semibold tracking-tight text-foreground group-hover:text-primary transition-colors">
                 {post.title}

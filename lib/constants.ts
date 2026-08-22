@@ -12,6 +12,25 @@ export const PROFILE_IMAGE = "/me.jpg";
 
 export const PROJECTS = [
   {
+    title: "AI Spec Blueprint",
+    featured: true,
+    status: "Live product",
+    summary:
+      "A system-definition layer that turns early ideas into reviewed decisions and durable context for coding agents.",
+    description:
+      "A web and CLI workflow for defining product context, architecture, schemas, guardrails, and implementation scope before an agent writes code.",
+    evidence: [
+      "Human-approved decisions",
+      "Schema-validated context",
+      "Deterministic Markdown output",
+    ],
+    tags: ["TypeScript", "Schemas", "Guardrails", "CLI workflow", "AI agents"],
+    focus: "Spec-first guardrails for agent-built software",
+    image: "/projects/ai-spec-blueprint.png",
+    imageAlt: "AI Spec Blueprint project blueprint dashboard",
+    link: "https://ai-spec-blueprint.vercel.app/",
+  },
+  {
     title: "PineForge",
     featured: true,
     status: "Live product",

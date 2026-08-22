@@ -174,6 +174,7 @@ export function Projects() {
                   type="button"
                   className="projects-carousel__control focus-ring"
                   aria-label="Previous shipped project"
+                  aria-controls="projects-carousel"
                   disabled={activeProject === 0}
                   onClick={() => scrollToProject(activeProject - 1)}
                 >
@@ -183,6 +184,7 @@ export function Projects() {
                   type="button"
                   className="projects-carousel__control focus-ring"
                   aria-label="Next shipped project"
+                  aria-controls="projects-carousel"
                   disabled={activeProject === carouselProjects.length - 1}
                   onClick={() => scrollToProject(activeProject + 1)}
                 >
@@ -193,19 +195,30 @@ export function Projects() {
 
             <div
               ref={carouselRef}
+              id="projects-carousel"
               className="projects-carousel"
               role="region"
+              aria-roledescription="carousel"
               aria-label="More shipped projects"
+              aria-describedby="projects-carousel-hint"
               onScroll={handleCarouselScroll}
             >
               {carouselProjects.map((project, index) => (
-                <div className="projects-carousel__slide" key={project.title}>
+                <div
+                  className="projects-carousel__slide"
+                  key={project.title}
+                  role="group"
+                  aria-roledescription="slide"
+                  aria-label={`${index + 2} of ${projectCount}: ${project.title}`}
+                >
                   <FeaturedProject project={project} index={index + 1} />
                 </div>
               ))}
             </div>
 
-            <p className="projects-carousel__hint">Swipe or use the arrows to explore the rest of the work.</p>
+            <p id="projects-carousel-hint" className="projects-carousel__hint">
+              Swipe or use the arrows to explore the rest of the work.
+            </p>
           </section>
         )}
       </div>

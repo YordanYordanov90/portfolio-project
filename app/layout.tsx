@@ -1,24 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SiteChrome } from "@/components/site-chrome";
 import { SOCIAL_LINKS } from "@/lib/constants";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const bricolage = Bricolage_Grotesque({
-  variable: "--font-bricolage",
-  subsets: ["latin"],
-  display: "swap",
-});
 
 export const viewport: Viewport = {
   themeColor: "#11100f",
@@ -54,6 +37,13 @@ export const metadata: Metadata = {
   title: "Yordan Yordanov — Full-Stack Developer",
   description:
     "Full-stack developer building secure, AI-powered web apps with Next.js, React, and TypeScript.",
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/icon.png", type: "image/png" },
+    ],
+    apple: "/favicon.svg",
+  },
   openGraph: {
     title: "Yordan Yordanov — Full-Stack Developer",
     description:
@@ -88,7 +78,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${bricolage.variable} ${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-background text-foreground`}
+        className="antialiased min-h-screen bg-background text-foreground"
       >
         <SiteChrome>{children}</SiteChrome>
         <script

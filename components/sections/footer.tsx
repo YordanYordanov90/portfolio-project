@@ -5,7 +5,7 @@ import { SectionWrapper } from "@/components/section-wrapper";
 import { Loader2, CheckCircle2, Github, Linkedin } from "lucide-react";
 import Link from "next/link";
 import { z } from "zod";
-import { SOCIAL_LINKS } from "@/lib/constants";
+import { CONTACT_EMAIL, SOCIAL_LINKS } from "@/lib/constants";
 
 const RATE_LIMIT_KEY = "contact_form_last_submit";
 const RATE_LIMIT_MINUTES = 5;
@@ -40,7 +40,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
   const formRef = useRef<HTMLFormElement | null>(null);
 
-  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error" | "rate_limited">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error" | "rate_limited" | "fallback">("idle");
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<
     Partial<Record<"name" | "email" | "message", string>>
@@ -57,13 +57,6 @@ export function Footer() {
     if (!rateLimit.allowed) {
       setStatus("rate_limited");
       setStatusMessage(`Please wait ${rateLimit.remainingMinutes} minute${rateLimit.remainingMinutes > 1 ? "s" : ""} before sending another message.`);
-      return;
-    }
-
-    const key = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
-    if (!key) {
-      setStatus("error");
-      setStatusMessage("Contact form is not configured. Please email me directly.");
       return;
     }
 
@@ -92,6 +85,18 @@ export function Footer() {
     if (parsed.data._gotcha && parsed.data._gotcha.trim().length > 0) {
       setStatus("error");
       setStatusMessage("Something went wrong. Please try again.");
+      return;
+    }
+
+    const key = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+    if (!key) {
+      const subject = encodeURIComponent("Portfolio Message");
+      const body = encodeURIComponent(
+        `Name: ${parsed.data.name}\nEmail: ${parsed.data.email}\n\n${parsed.data.message}`,
+      );
+      setStatus("fallback");
+      setStatusMessage("Opening your email app with the message ready.");
+      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
       return;
     }
 
@@ -130,7 +135,7 @@ export function Footer() {
   }
 
   return (
-    <>
+    <footer className="site-footer">
       <div className="grain-line mx-auto max-w-6xl px-6" aria-hidden />
       <SectionWrapper id="contact" className="mx-auto max-w-6xl px-6 py-16 md:py-20">
       <div className="grid items-start gap-10 md:grid-cols-2 md:gap-16">
@@ -192,7 +197,7 @@ export function Footer() {
             <div className="flex flex-col gap-3 pt-1">
               <button
                 type="submit"
-                disabled={status === "sending" || status === "success" || status === "rate_limited"}
+                disabled={status === "sending" || status === "success" || status === "rate_limited" || status === "fallback"}
                 className="btn-primary focus-ring relative w-full overflow-hidden disabled:pointer-events-none disabled:opacity-60"
               >
                 <span
@@ -206,6 +211,8 @@ export function Footer() {
                       <CheckCircle2 className="h-4 w-4" />
                       Message Sent
                     </>
+                  ) : status === "fallback" ? (
+                    "Opening email…"
                   ) : (
                     "Send message"
                   )}
@@ -232,11 +239,13 @@ export function Footer() {
                   </span>
                 ) : status === "rate_limited" ? (
                   <span className="font-medium text-primary/80">{statusMessage}</span>
+                ) : status === "fallback" ? (
+                  <span className="font-medium text-primary">{statusMessage}</span>
                 ) : (
                   <span className="text-muted-foreground">
                     Prefer email?{" "}
                     <Link
-                      href="mailto:y.yordanov.work@gmail.com?subject=Portfolio%20Message"
+                      href={`mailto:${CONTACT_EMAIL}?subject=Portfolio%20Message`}
                       className="link-subtle underline underline-offset-4"
                     >
                       Send a direct message
@@ -255,7 +264,7 @@ export function Footer() {
         © {currentYear} Yordan Yordanov. All rights reserved.
       </div>
     </SectionWrapper>
-    </>
+    </footer>
   );
 }
 

@@ -34,7 +34,7 @@ export function About() {
               useful.
             </p>
             <p className="text-sm text-muted-foreground">
-              Based in Plovdiv, Bulgaria · 5 projects shipped
+              Based in Plovdiv, Bulgaria · 6 projects shipped
             </p>
           </div>
 

@@ -1,31 +1,44 @@
 import Link from "next/link";
 
-const proofPoints = [
-  { value: "5", label: "live products in the portfolio" },
-  { value: "QA", label: "test discipline carried into every build" },
-  { value: "AI", label: "where it earns its place in the product" },
-];
+const AUDIT_TOOL_URL = "https://website-audit-tool-livid.vercel.app/en";
+
+const auditAreas = ["Performance", "SEO", "Accessibility", "Content", "Conversion"];
 
 export function ProofPanel() {
   return (
-    <aside className="proof-panel" aria-label="Selected proof">
+    <aside className="proof-panel proof-panel--audit" aria-labelledby="audit-tool-heading">
       <div className="proof-panel__header">
-        <span className="proof-panel__label">Proof, not promises</span>
-        <span className="proof-panel__index">01—03</span>
+        <span className="proof-panel__label">Value before the call</span>
+        <span className="proof-panel__index">Free tool</span>
       </div>
 
-      <div className="proof-panel__list">
-        {proofPoints.map((point) => (
-          <div className="proof-panel__row" key={point.value}>
-            <strong>{point.value}</strong>
-            <span>{point.label}</span>
-          </div>
-        ))}
+      <div className="proof-panel__audit-body">
+        <p className="proof-panel__audit-kicker">Website health check</p>
+        <h2 id="audit-tool-heading" className="proof-panel__audit-title">
+          See what your website needs next.
+        </h2>
+        <p className="proof-panel__audit-copy">
+          Run a focused audit before we talk and leave with a report you can act on.
+        </p>
+
+        <ul className="proof-panel__areas" aria-label="Website audit areas">
+          {auditAreas.map((area) => (
+            <li key={area}>{area}</li>
+          ))}
+        </ul>
       </div>
 
-      <Link href="#projects" className="proof-panel__link focus-ring">
-        Open the case studies <span aria-hidden="true">↗</span>
+      <Link
+        href={AUDIT_TOOL_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        prefetch={false}
+        className="proof-panel__link focus-ring"
+      >
+        Audit your website <span aria-hidden="true">↗</span>
       </Link>
+
+      <p className="proof-panel__trust">No email · No account · No permanent report storage</p>
     </aside>
   );
 }

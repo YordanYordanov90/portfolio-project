@@ -1,21 +1,25 @@
-/* Hallmark · macrostructure: Marquee Hero · tone: technical · anchor hue: warm ivory · pre-emit critique: P5 H5 E5 S5 R5 V5 */
+/* Hallmark · macrostructure: Marquee Hero · tone: technical glass · anchor hue: signal orange · studied: yes · DNA-source: url */
 @import "tailwindcss";
 
 :root {
   --background: #11100f;
-  --background-raised: #181614;
-  --background-soft: #211e1a;
-  --foreground: #eeeae2;
-  --card: #211e1a;
-  --card-foreground: #eeeae2;
-  --border: #3a352e;
-  --border-strong: #5a5145;
-  --primary: #f1e6d2;
-  --primary-foreground: oklch(18% 0.018 240);
-  --muted: #211e1a;
-  --muted-foreground: #aaa39a;
-  --accent: #f1e6d2;
-  --accent-foreground: oklch(18% 0.018 240);
+  --background-raised: #18191d;
+  --background-soft: #202228;
+  --foreground: #f9fafb;
+  --card: #1b1d22;
+  --card-foreground: #f9fafb;
+  --border: #343943;
+  --border-strong: #5b6270;
+  --primary: #fc4c02;
+  --primary-foreground: #ffffff;
+  --muted: #202228;
+  --muted-foreground: #a8afbd;
+  --accent: #fc4c02;
+  --accent-foreground: #ffffff;
+  --glass-surface: color-mix(in srgb, var(--background-raised) 72%, transparent);
+  --glass-surface-strong: color-mix(in srgb, var(--background-raised) 88%, transparent);
+  --glass-border: color-mix(in srgb, var(--foreground) 14%, transparent);
+  --glass-shadow: 0 18px 48px rgb(0 0 0 / 22%);
   --error: oklch(68% 0.16 25);
   --success: oklch(72% 0.12 155);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -25,7 +29,7 @@
   --dur-short: 220ms;
   --dur-long: 420ms;
   --radius-button: 0.25rem;
-  --radius-card: 1.5rem;
+  --radius-card: 1.25rem;
   --space-xs: 0.5rem;
   --space-sm: 0.75rem;
   --space-md: 1rem;
@@ -86,7 +90,7 @@ body {
   height: min(36rem, 66svh);
   background: radial-gradient(
     ellipse 48% 55% at 18% 16%,
-    color-mix(in srgb, var(--primary) 7%, transparent),
+    color-mix(in srgb, var(--primary) 10%, transparent),
     transparent 72%
   );
   pointer-events: none;
@@ -363,6 +367,9 @@ body::before {
 
 .mobile-menu {
   transform-origin: top center;
+  background: var(--glass-surface-strong);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  backdrop-filter: blur(16px) saturate(120%);
   transition: transform 200ms var(--ease-out), opacity 180ms var(--ease-out);
 }
 
@@ -399,12 +406,17 @@ body::before {
 }
 
 .glass-panel {
-  background-color: var(--card);
-  border: 1px solid var(--border);
+  background: var(--glass-surface);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  -webkit-backdrop-filter: blur(18px) saturate(120%);
+  backdrop-filter: blur(18px) saturate(120%);
 }
 
 .contact-field {
-  background-color: var(--background-raised);
+  background-color: color-mix(in srgb, var(--background-raised) 82%, transparent);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   outline: 2px solid transparent;
   outline-offset: 1px;
 }
@@ -416,6 +428,9 @@ body::before {
 }
 
 .social-link {
+  background-color: var(--glass-surface);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   transition: border-color 160ms var(--ease-out), color 160ms var(--ease-out),
     background-color 160ms var(--ease-out), transform 160ms var(--ease-out);
 }
@@ -443,12 +458,14 @@ h3 {
   inset: 0 0 auto;
   z-index: var(--z-sticky);
   width: 100%;
-  border-bottom: 1px solid var(--border);
-  background: var(--background);
+  border-bottom: 1px solid var(--glass-border);
+  background: color-mix(in srgb, var(--background) 76%, transparent);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  backdrop-filter: blur(16px) saturate(120%);
 }
 
 .site-header.is-scrolled {
-  background: var(--background-raised);
+  background: var(--glass-surface-strong);
 }
 
 .wordmark {
@@ -478,7 +495,7 @@ h3 {
 .header-cv {
   min-height: 2.25rem;
   align-items: center;
-  border: 1px solid var(--primary);
+  border: 1px solid color-mix(in srgb, var(--primary) 72%, var(--glass-border));
   border-radius: var(--radius-button);
   padding-inline: var(--space-md);
   color: var(--primary);
@@ -571,9 +588,12 @@ h3 {
 }
 
 .proof-panel {
-  border: 1px solid var(--border-strong);
+  border: 1px solid color-mix(in srgb, var(--primary) 28%, var(--glass-border));
   border-radius: var(--radius-card);
-  background: var(--background-raised);
+  background: var(--glass-surface);
+  box-shadow: var(--glass-shadow);
+  -webkit-backdrop-filter: blur(18px) saturate(120%);
+  backdrop-filter: blur(18px) saturate(120%);
   padding: var(--space-xl);
 }
 
@@ -801,8 +821,11 @@ h3 {
 
 .projects-carousel .project-featured {
   height: 100%;
-  border: 1px solid var(--border);
-  background: var(--background-raised);
+  border: 1px solid var(--glass-border);
+  background: var(--glass-surface);
+  box-shadow: var(--glass-shadow);
+  -webkit-backdrop-filter: blur(18px) saturate(120%);
+  backdrop-filter: blur(18px) saturate(120%);
   padding: clamp(1.25rem, 3vw, 2.5rem);
 }
 
@@ -1070,6 +1093,9 @@ h3 {
 
 .process-item {
   min-height: 8.5rem;
+  background: var(--glass-surface);
+  -webkit-backdrop-filter: blur(14px) saturate(115%);
+  backdrop-filter: blur(14px) saturate(115%);
   transition: transform var(--dur-short) var(--ease-out), border-color var(--dur-short) var(--ease-out), background-color var(--dur-short) var(--ease-out);
 }
 
@@ -1080,7 +1106,7 @@ h3 {
 .process-item:hover {
   transform: translateY(-0.125rem);
   border-color: var(--border-strong);
-  background-color: var(--background-soft);
+  background-color: color-mix(in srgb, var(--primary) 7%, var(--glass-surface));
 }
 
 .about-section {
@@ -1097,7 +1123,7 @@ h3 {
   width: 100vw;
   transform: translateX(-50%);
   border-block: 1px solid var(--border);
-  background: var(--background-raised);
+  background: color-mix(in srgb, var(--background-raised) 80%, transparent);
 }
 
 .about-portrait img {

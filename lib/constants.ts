@@ -12,6 +12,25 @@ export const PROFILE_IMAGE = "/me.jpg";
 
 export const PROJECTS = [
   {
+    title: "Website Audit Tool",
+    featured: true,
+    status: "Free client tool",
+    summary:
+      "A privacy-minded website health check that gives businesses useful direction before the first call.",
+    description:
+      "A focused, single-page audit covering performance, technical SEO, accessibility, content clarity, and conversion readiness, with a printable report people can act on.",
+    evidence: [
+      "Five practical audit areas",
+      "No email or account required",
+      "Printable action report",
+    ],
+    tags: ["Performance", "Technical SEO", "Accessibility", "Content", "Conversion"],
+    focus: "Useful insight before the engagement starts",
+    image: "/projects/website-audit-tool.png",
+    imageAlt: "Website Audit Tool homepage with URL input and five audit areas",
+    link: "https://website-audit-tool-livid.vercel.app/en",
+  },
+  {
     title: "AI Spec Blueprint",
     featured: true,
     status: "Live product",

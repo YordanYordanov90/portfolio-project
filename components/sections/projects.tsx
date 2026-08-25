@@ -26,6 +26,8 @@ function ProjectActions({ project, compact = false }: { project: Project; compac
 }
 
 function ProjectMedia({ project, featured = false }: { project: Project; featured?: boolean }) {
+  const isWebsiteAuditTool = project.image === "/projects/website-audit-tool.png";
+
   return (
     <a
       href={project.link}
@@ -39,11 +41,14 @@ function ProjectMedia({ project, featured = false }: { project: Project; feature
           src={project.image}
           alt={project.imageAlt}
           fill
-          className="project-image object-cover"
+          className={`project-image ${isWebsiteAuditTool ? "project-image--contained object-contain" : "object-cover"}`}
           sizes={featured ? "(max-width: 768px) 100vw, 680px" : "(max-width: 768px) 100vw, 360px"}
           quality={85}
         />
-        <div className="project-media__veil" aria-hidden="true" />
+        <div
+          className={`project-media__veil ${isWebsiteAuditTool ? "project-media__veil--subtle" : ""}`}
+          aria-hidden="true"
+        />
       </div>
     </a>
   );

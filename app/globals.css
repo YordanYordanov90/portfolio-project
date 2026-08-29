@@ -367,9 +367,11 @@ body::before {
 
 .mobile-menu {
   transform-origin: top center;
-  background: var(--glass-surface-strong);
+  /* Keep the menu fully opaque so underlying sections never compete with its links. */
+  background: var(--background);
   -webkit-backdrop-filter: blur(16px) saturate(120%);
   backdrop-filter: blur(16px) saturate(120%);
+  z-index: 1;
   transition: transform 200ms var(--ease-out), opacity 180ms var(--ease-out);
 }
 
@@ -525,7 +527,7 @@ h3 {
 
 .hero-kicker {
   display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--space-xs);
   color: var(--muted-foreground);
   font-family: var(--font-mono);
@@ -535,8 +537,10 @@ h3 {
 }
 
 .hero-kicker__dot {
+  flex: 0 0 0.45rem;
   width: 0.45rem;
   height: 0.45rem;
+  margin-top: 0.28rem;
   border-radius: 50%;
   background: var(--primary);
 }

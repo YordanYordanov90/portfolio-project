@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import "../tokens.css";
+import "./new-ui.css";
 import { SiteChrome } from "@/components/site-chrome";
 import { SOCIAL_LINKS } from "@/lib/constants";
 

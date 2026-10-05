@@ -2,26 +2,41 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
-import { ScrollProgress } from "./scroll-progress";
 
 const navLinks = [
   { href: "#projects", label: "Work", sectionId: "projects" },
   { href: "#process", label: "Process", sectionId: "process" },
   { href: "#about", label: "About", sectionId: "about" },
+  { href: "#services", label: "Services", sectionId: "services" },
   { href: "#stack", label: "Stack", sectionId: "stack" },
   { href: "/blog", label: "Blog", sectionId: null },
   { href: "#contact", label: "Contact", sectionId: "contact" },
 ];
 
 export function Header() {
+  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
 
+  const resolveHref = (link: (typeof navLinks)[number]) => {
+    if (link.sectionId) {
+      return { pathname: "/", hash: link.sectionId };
+    }
+
+    return { pathname: link.href };
+  };
+
+  const isLinkActive = (link: (typeof navLinks)[number]) => {
+    if (link.sectionId) return pathname === "/" && activeSection === link.sectionId;
+    return pathname === link.href || pathname.startsWith(`${link.href}/`);
+  };
+
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 12);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -70,13 +85,9 @@ export function Header() {
 
   return (
     <header
-      className={`site-header ${
-        scrolled
-          ? "is-scrolled"
-          : ""
-      }`}
+      className={`site-header ${scrolled ? "is-scrolled" : ""}`}
     >
-      <div className="site-header__inner flex items-center justify-between px-6 py-4 max-w-6xl mx-auto w-full">
+      <div className="site-header__inner flex items-center justify-between">
         <Link
           href="/"
           className="wordmark link-subtle pressable focus-ring"
@@ -85,51 +96,58 @@ export function Header() {
           <span>Yordanov</span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-6" aria-label="Main">
+        <nav className="desktop-nav" aria-label="Main">
           {navLinks.map((link) => (
             <Link
               key={link.href}
-              href={link.href}
-              data-active={link.sectionId !== null && activeSection === link.sectionId}
-              className="nav-link pressable focus-ring text-sm text-muted-foreground"
+              href={resolveHref(link)}
+              data-active={isLinkActive(link)}
+              aria-current={isLinkActive(link) ? "location" : undefined}
+              className="desktop-nav__link focus-ring"
             >
               {link.label}
             </Link>
           ))}
         </nav>
 
-        <a
-          href="/cv.pdf"
-          download
-          className="header-cv focus-ring hidden md:inline-flex"
-        >
-          Download CV
-        </a>
+        <div className="header-actions">
+          <span className="header-status" aria-label="Available for new opportunities">
+            <span className="header-status__dot" aria-hidden="true" />
+            <span>Available</span>
+          </span>
+          <a
+            href="/cv.pdf"
+            download
+            className="header-cv focus-ring"
+          >
+            CV <span aria-hidden="true">↗</span>
+          </a>
 
-        <button
-          type="button"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="pressable focus-ring md:hidden p-2 rounded-sm text-muted-foreground"
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          aria-expanded={isMenuOpen}
-        >
-          {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+          <button
+            type="button"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="header-menu-toggle focus-ring"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuOpen}
+          >
+            {isMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+          </button>
+        </div>
       </div>
 
       <div
-        className="mobile-menu absolute left-0 right-0 top-full overflow-hidden border-b border-border bg-background shadow-lg shadow-black/40 md:hidden"
+        className="mobile-menu"
         data-open={isMenuOpen}
         aria-hidden={!isMenuOpen}
         inert={!isMenuOpen ? true : undefined}
       >
-        <nav className="flex flex-col gap-1 px-6 py-4 max-w-6xl mx-auto w-full" aria-label="Main mobile">
+        <nav className="flex flex-col gap-1" aria-label="Main">
           {navLinks.map((link) => (
             <Link
               key={link.href}
-              href={link.href}
+              href={resolveHref(link)}
               onClick={() => setIsMenuOpen(false)}
-              data-active={link.sectionId !== null && activeSection === link.sectionId}
+              data-active={isLinkActive(link)}
               className="nav-link pressable focus-ring py-2 text-sm text-muted-foreground"
             >
               {link.label}
@@ -141,7 +159,6 @@ export function Header() {
         </nav>
       </div>
 
-      <ScrollProgress />
     </header>
   );
 }

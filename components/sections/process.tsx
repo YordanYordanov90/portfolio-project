@@ -55,13 +55,14 @@ export function Process() {
             rel="noopener noreferrer"
             className={`process-item group pressable focus-ring rounded-sm border border-border bg-card p-5 ${i % 2 === 0 ? "process-item--tall" : ""}`}
           >
-            <span className="flex items-center justify-between gap-2 font-mono text-sm text-primary">
-              <span className="underline-offset-4 group-hover:underline">{file.name}</span>
-              <ArrowUpRight className="h-4 w-4 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
+            <span className="process-item__index" aria-hidden="true">
+              {String(i + 1).padStart(2, "0")}
             </span>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              {file.body}
-            </p>
+            <span className="process-item__copy">
+              <span>{file.name}</span>
+              <p>{file.body}</p>
+            </span>
+            <ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden="true" />
           </a>
         ))}
       </div>

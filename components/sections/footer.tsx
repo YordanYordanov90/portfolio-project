@@ -2,7 +2,7 @@
 
 import { useId, useRef, useState } from "react";
 import { SectionWrapper } from "@/components/section-wrapper";
-import { Loader2, CheckCircle2, Github, Linkedin } from "lucide-react";
+import { Loader2, CheckCircle2, Github, Linkedin, Check, Copy, Mail } from "lucide-react";
 import Link from "next/link";
 import { z } from "zod";
 import { CONTACT_EMAIL, SOCIAL_LINKS } from "@/lib/constants";
@@ -42,6 +42,8 @@ export function Footer() {
 
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error" | "rate_limited" | "fallback">("idle");
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
+  const [emailCopied, setEmailCopied] = useState(false);
+  const [emailCopyError, setEmailCopyError] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<
     Partial<Record<"name" | "email" | "message", string>>
   >({});
@@ -134,6 +136,43 @@ export function Footer() {
     }
   }
 
+  async function copyEmail() {
+    try {
+      let copied = false;
+
+      if (navigator.clipboard?.writeText) {
+        try {
+          await navigator.clipboard.writeText(CONTACT_EMAIL);
+          copied = true;
+        } catch {
+          copied = false;
+        }
+      }
+
+      if (!copied) {
+        const textarea = document.createElement("textarea");
+        textarea.value = CONTACT_EMAIL;
+        textarea.setAttribute("readonly", "");
+        textarea.style.position = "fixed";
+        textarea.style.opacity = "0";
+        document.body.appendChild(textarea);
+        textarea.select();
+        copied = document.execCommand("copy");
+        textarea.remove();
+      }
+
+      if (!copied) throw new Error("Copy was not available.");
+
+      setEmailCopied(true);
+      setEmailCopyError(false);
+      window.setTimeout(() => setEmailCopied(false), 2200);
+    } catch {
+      setEmailCopied(false);
+      setEmailCopyError(true);
+      window.setTimeout(() => setEmailCopyError(false), 3600);
+    }
+  }
+
   return (
     <footer className="site-footer">
       <div className="grain-line mx-auto max-w-6xl px-6" aria-hidden />
@@ -145,6 +184,26 @@ export function Footer() {
             Open to conversations about AI integration, web security, or Next.js
             architecture.
           </p>
+
+          <div className="contact-email-row" aria-label="Email address">
+            <Mail className="h-4 w-4" aria-hidden="true" />
+            <div className="contact-email-group">
+              <input
+                className="contact-email-field"
+                aria-label="Email address, select to copy manually"
+                value={CONTACT_EMAIL}
+                readOnly
+                onFocus={(event) => event.currentTarget.select()}
+              />
+              <a href={`mailto:${CONTACT_EMAIL}`} className="contact-email-link focus-ring">Open email app ↗</a>
+            </div>
+            <button type="button" onClick={copyEmail} className="contact-copy focus-ring" aria-label={emailCopied ? "Email copied" : emailCopyError ? "Copy email failed" : "Copy email address"}>
+              {emailCopied ? <Check className="h-4 w-4" aria-hidden="true" /> : <Copy className="h-4 w-4" aria-hidden="true" />}
+              <span>{emailCopied ? "Copied" : emailCopyError ? "Try again" : "Copy"}</span>
+            </button>
+          </div>
+          {emailCopyError ? <p className="contact-copy-status" role="status">Copy unavailable — select the email address above.</p> : null}
+          <p className="contact-next-step">Send the context you have. I will reply with a few focused questions and a sensible next step within 24–48 hours.</p>
 
           <div className="mt-6 flex items-center justify-center gap-3 md:justify-start">
             {socialLinks.map(({ href, label, icon: Icon }) => (
@@ -335,24 +394,36 @@ function FloatingField({
   const id = `${name}-${reactId}`;
   const describedById = `${id}-desc`;
   const hintOrError = error ?? hint;
+  const placeholder =
+    name === "email"
+      ? "you@example.com"
+      : name === "message"
+        ? "Project details, timeline, or question"
+        : "Your name";
 
   const base =
-    "contact-field peer w-full rounded-sm border px-4 pt-5 pb-2.5 text-sm text-foreground placeholder:text-transparent outline-none transition-[border-color,box-shadow,background-color] duration-200 focus-visible:ring-2 focus-visible:ring-primary/30";
+    "contact-field w-full rounded-sm border px-4 py-3 text-sm text-foreground outline-none";
   const border = error
     ? "border-red-500/60 focus-visible:ring-red-500/20"
     : "border-border focus-visible:border-primary/50";
 
   return (
-    <div className="space-y-1.5">
-      <div className="relative">
+    <div className="contact-field-group">
+      <label htmlFor={id} className="contact-field-label">
+        {label}
+        {required ? <span aria-hidden="true"> *</span> : null}
+      </label>
+
+      <div>
         {multiline ? (
           <textarea
             id={id}
             name={name}
             required={required}
             rows={4}
-            placeholder=" "
+            placeholder={placeholder}
             aria-invalid={error ? true : undefined}
+            aria-required={required}
             aria-describedby={hintOrError ? describedById : undefined}
             className={`${base} ${border} resize-y min-h-[140px]`}
           />
@@ -363,30 +434,23 @@ function FloatingField({
             type={type}
             required={required}
             autoComplete={autoComplete}
-            placeholder=" "
+            placeholder={placeholder}
             aria-invalid={error ? true : undefined}
+            aria-required={required}
             aria-describedby={hintOrError ? describedById : undefined}
             className={`${base} ${border}`}
           />
         )}
 
-        <label
-          htmlFor={id}
-          className="pointer-events-none absolute left-4 top-4 origin-left text-sm text-muted-foreground transition-all duration-150 peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:top-2.5 peer-focus:text-xs peer-focus:text-foreground peer-[:not(:placeholder-shown)]:top-2.5 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:opacity-0"
-        >
-          {label}
-          {required ? <span className="text-muted-foreground"> *</span> : null}
-        </label>
       </div>
 
-      {hintOrError ? (
-        <p
-          id={describedById}
-          className={`text-xs ${error ? "text-red-600 dark:text-red-400" : "text-muted-foreground"}`}
-        >
-          {hintOrError}
-        </p>
-      ) : null}
+      <p
+        id={hintOrError ? describedById : undefined}
+        aria-hidden={hintOrError ? undefined : true}
+        className={`contact-field-help ${error ? "contact-field-help--error" : ""}`}
+      >
+        {hintOrError ?? "\u00a0"}
+      </p>
     </div>
   );
 }

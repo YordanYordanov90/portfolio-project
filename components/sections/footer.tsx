@@ -43,6 +43,7 @@ export function Footer() {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error" | "rate_limited" | "fallback">("idle");
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [emailCopied, setEmailCopied] = useState(false);
+  const [emailCopyError, setEmailCopyError] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<
     Partial<Record<"name" | "email" | "message", string>>
   >({});
@@ -137,11 +138,38 @@ export function Footer() {
 
   async function copyEmail() {
     try {
-      await navigator.clipboard.writeText(CONTACT_EMAIL);
+      let copied = false;
+
+      if (navigator.clipboard?.writeText) {
+        try {
+          await navigator.clipboard.writeText(CONTACT_EMAIL);
+          copied = true;
+        } catch {
+          copied = false;
+        }
+      }
+
+      if (!copied) {
+        const textarea = document.createElement("textarea");
+        textarea.value = CONTACT_EMAIL;
+        textarea.setAttribute("readonly", "");
+        textarea.style.position = "fixed";
+        textarea.style.opacity = "0";
+        document.body.appendChild(textarea);
+        textarea.select();
+        copied = document.execCommand("copy");
+        textarea.remove();
+      }
+
+      if (!copied) throw new Error("Copy was not available.");
+
       setEmailCopied(true);
+      setEmailCopyError(false);
       window.setTimeout(() => setEmailCopied(false), 2200);
     } catch {
       setEmailCopied(false);
+      setEmailCopyError(true);
+      window.setTimeout(() => setEmailCopyError(false), 3600);
     }
   }
 
@@ -160,11 +188,12 @@ export function Footer() {
           <div className="contact-email-row" aria-label="Email address">
             <Mail className="h-4 w-4" aria-hidden="true" />
             <a href={`mailto:${CONTACT_EMAIL}`} className="contact-email focus-ring">{CONTACT_EMAIL}</a>
-            <button type="button" onClick={copyEmail} className="contact-copy focus-ring" aria-label={emailCopied ? "Email copied" : "Copy email address"}>
+            <button type="button" onClick={copyEmail} className="contact-copy focus-ring" aria-label={emailCopied ? "Email copied" : emailCopyError ? "Copy email failed" : "Copy email address"}>
               {emailCopied ? <Check className="h-4 w-4" aria-hidden="true" /> : <Copy className="h-4 w-4" aria-hidden="true" />}
-              <span>{emailCopied ? "Copied" : "Copy"}</span>
+              <span>{emailCopied ? "Copied" : emailCopyError ? "Try again" : "Copy"}</span>
             </button>
           </div>
+          {emailCopyError ? <p className="contact-copy-status" role="status">Copy unavailable — select the email address above.</p> : null}
           <p className="contact-next-step">Send the context you have. I will reply with a few focused questions and a sensible next step within 24–48 hours.</p>
 
           <div className="mt-6 flex items-center justify-center gap-3 md:justify-start">

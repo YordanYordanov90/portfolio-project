@@ -35,6 +35,12 @@ export function AnimatedItem({
     const item = itemRef.current;
     if (!item) return;
 
+    if (!("IntersectionObserver" in window)) {
+      return;
+    }
+
+    item.classList.add("is-enhanced");
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -46,11 +52,18 @@ export function AnimatedItem({
     );
 
     observer.observe(item);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      item.classList.remove("is-enhanced");
+    };
   }, []);
 
   return (
-    <div ref={itemRef} style={style} className={cn("reveal-item", isVisible && "is-visible", className)}>
+    <div
+      ref={itemRef}
+      style={style}
+      className={cn("reveal-item", isVisible && "is-visible", className)}
+    >
       {children}
     </div>
   );

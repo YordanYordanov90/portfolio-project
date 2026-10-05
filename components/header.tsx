@@ -21,6 +21,11 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
 
+  const resolveHref = (link: (typeof navLinks)[number]) => {
+    if (!link.sectionId || pathname === "/") return link.href;
+    return { pathname: "/", hash: link.sectionId };
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 12);
@@ -87,7 +92,7 @@ export function Header() {
           {navLinks.map((link) => (
             <Link
               key={link.href}
-              href={link.sectionId && pathname !== "/" ? `/${link.href}` : link.href}
+              href={resolveHref(link)}
               data-active={link.sectionId !== null && activeSection === link.sectionId}
               aria-current={link.sectionId !== null && activeSection === link.sectionId ? "location" : undefined}
               className="desktop-nav__link focus-ring"
@@ -132,7 +137,7 @@ export function Header() {
           {navLinks.map((link) => (
             <Link
               key={link.href}
-              href={link.sectionId && pathname !== "/" ? `/${link.href}` : link.href}
+              href={resolveHref(link)}
               onClick={() => setIsMenuOpen(false)}
               data-active={link.sectionId !== null && activeSection === link.sectionId}
               className="nav-link pressable focus-ring py-2 text-sm text-muted-foreground"

@@ -1374,13 +1374,16 @@ textarea:focus-visible {
 }
 
 .reveal-item {
-  opacity: 0;
-  transform: translateY(0.75rem);
   transition: opacity 360ms var(--ease-out), transform 420ms var(--ease-out);
   transition-delay: var(--reveal-delay, 0ms);
 }
 
-.reveal-item.is-visible {
+.reveal-item.is-enhanced {
+  opacity: 0;
+  transform: translateY(0.75rem);
+}
+
+.reveal-item.is-enhanced.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
@@ -1642,6 +1645,7 @@ textarea:focus-visible {
 .contact-email { color: var(--color-ink); font-family: var(--font-code); font-size: var(--text-xs); }
 .contact-copy { display: inline-flex; min-height: 2rem; align-items: center; gap: var(--space-xs); border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-pill); background: var(--color-paper-3); padding-inline: var(--space-sm); color: var(--color-muted); font-family: var(--font-code); font-size: var(--text-xs); transition: transform var(--dur-micro) var(--ease-out), border-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out); }
 .contact-next-step { max-width: 42ch; margin: var(--space-xs) 0 0; color: var(--color-neutral); font-size: var(--text-xs); line-height: 1.55; }
+.contact-copy-status { margin: 0; color: var(--color-error); font-family: var(--font-code); font-size: var(--text-xs); }
 
 .case-study-section {
   display: grid;
@@ -1722,7 +1726,7 @@ textarea:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal-item { opacity: 1; transform: none; transition: none; }
+  .reveal-item.is-enhanced { opacity: 1; transform: none; transition: none; }
   .audit-demo__scan-line, .audit-demo__bar span { animation: none; }
   .project-image { transition: opacity 150ms ease; transform: none; }
 }

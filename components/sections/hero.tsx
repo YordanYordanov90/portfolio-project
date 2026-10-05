@@ -9,11 +9,6 @@ export function Hero() {
     <>
       <section id="hero" className="hero-grid section-anchor">
         <div className="hero-copy hero-enter">
-          {/* <div className="hero-kicker">
-            <span className="hero-kicker__dot" aria-hidden="true" />
-            <span>Full-stack developer · AI products · web security</span>
-          </div> */}
-
           <h1>
             <span className="hero-title__lead">I ship reliable</span>
             <span>AI products.</span>

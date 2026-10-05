@@ -22,8 +22,16 @@ export function Header() {
   const [activeSection, setActiveSection] = useState<string | null>(null);
 
   const resolveHref = (link: (typeof navLinks)[number]) => {
-    if (!link.sectionId || pathname === "/") return link.href;
-    return { pathname: "/", hash: link.sectionId };
+    if (link.sectionId) {
+      return { pathname: "/", hash: link.sectionId };
+    }
+
+    return { pathname: link.href };
+  };
+
+  const isLinkActive = (link: (typeof navLinks)[number]) => {
+    if (link.sectionId) return pathname === "/" && activeSection === link.sectionId;
+    return pathname === link.href || pathname.startsWith(`${link.href}/`);
   };
 
   useEffect(() => {
@@ -93,8 +101,8 @@ export function Header() {
             <Link
               key={link.href}
               href={resolveHref(link)}
-              data-active={link.sectionId !== null && activeSection === link.sectionId}
-              aria-current={link.sectionId !== null && activeSection === link.sectionId ? "location" : undefined}
+              data-active={isLinkActive(link)}
+              aria-current={isLinkActive(link) ? "location" : undefined}
               className="desktop-nav__link focus-ring"
             >
               {link.label}
@@ -139,7 +147,7 @@ export function Header() {
               key={link.href}
               href={resolveHref(link)}
               onClick={() => setIsMenuOpen(false)}
-              data-active={link.sectionId !== null && activeSection === link.sectionId}
+              data-active={isLinkActive(link)}
               className="nav-link pressable focus-ring py-2 text-sm text-muted-foreground"
             >
               {link.label}

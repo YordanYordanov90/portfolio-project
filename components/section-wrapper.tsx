@@ -36,7 +36,8 @@ export function AnimatedItem({
     if (!item) return;
 
     if (!("IntersectionObserver" in window)) {
-      return;
+      item.classList.add("reveal-fallback");
+      return () => item.classList.remove("reveal-fallback");
     }
 
     item.classList.add("is-enhanced");

@@ -1388,6 +1388,12 @@ textarea:focus-visible {
   transform: translateY(0);
 }
 
+.reveal-item.reveal-fallback {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
 .hero-demo {
   position: relative;
   z-index: var(--z-raised);
@@ -1642,7 +1648,9 @@ textarea:focus-visible {
 .project-media__veil { transition: opacity var(--dur-short) var(--ease-out); }
 
 .contact-email-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-sm); margin-top: var(--space-sm); color: var(--color-accent); }
-.contact-email { color: var(--color-ink); font-family: var(--font-code); font-size: var(--text-xs); }
+.contact-email-group { display: grid; min-width: min(100%, 18rem); gap: var(--space-2xs); }
+.contact-email-field { width: 100%; min-height: 2.25rem; border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-sm); background: var(--color-paper-3); padding-inline: var(--space-sm); color: var(--color-ink); font-family: var(--font-code); font-size: var(--text-xs); }
+.contact-email-link { width: fit-content; color: var(--color-accent); font-family: var(--font-code); font-size: var(--text-xs); }
 .contact-copy { display: inline-flex; min-height: 2rem; align-items: center; gap: var(--space-xs); border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-pill); background: var(--color-paper-3); padding-inline: var(--space-sm); color: var(--color-muted); font-family: var(--font-code); font-size: var(--text-xs); transition: transform var(--dur-micro) var(--ease-out), border-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out); }
 .contact-next-step { max-width: 42ch; margin: var(--space-xs) 0 0; color: var(--color-neutral); font-size: var(--text-xs); line-height: 1.55; }
 .contact-copy-status { margin: 0; color: var(--color-error); font-family: var(--font-code); font-size: var(--text-xs); }

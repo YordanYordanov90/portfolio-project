@@ -187,7 +187,16 @@ export function Footer() {
 
           <div className="contact-email-row" aria-label="Email address">
             <Mail className="h-4 w-4" aria-hidden="true" />
-            <a href={`mailto:${CONTACT_EMAIL}`} className="contact-email focus-ring">{CONTACT_EMAIL}</a>
+            <div className="contact-email-group">
+              <input
+                className="contact-email-field"
+                aria-label="Email address, select to copy manually"
+                value={CONTACT_EMAIL}
+                readOnly
+                onFocus={(event) => event.currentTarget.select()}
+              />
+              <a href={`mailto:${CONTACT_EMAIL}`} className="contact-email-link focus-ring">Open email app ↗</a>
+            </div>
             <button type="button" onClick={copyEmail} className="contact-copy focus-ring" aria-label={emailCopied ? "Email copied" : emailCopyError ? "Copy email failed" : "Copy email address"}>
               {emailCopied ? <Check className="h-4 w-4" aria-hidden="true" /> : <Copy className="h-4 w-4" aria-hidden="true" />}
               <span>{emailCopied ? "Copied" : emailCopyError ? "Try again" : "Copy"}</span>

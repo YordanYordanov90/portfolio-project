@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
 interface SectionWrapperProps extends React.HTMLAttributes<HTMLElement> {
@@ -21,12 +22,35 @@ export function SectionWrapper({
 export function AnimatedItem({
   children,
   className,
+  style,
 }: {
   children: React.ReactNode;
   className?: string;
+  style?: React.CSSProperties;
 }) {
+  const itemRef = useRef<HTMLDivElement | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const item = itemRef.current;
+    if (!item) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -48px" },
+    );
+
+    observer.observe(item);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className={className}>
+    <div ref={itemRef} style={style} className={cn("reveal-item", isVisible && "is-visible", className)}>
       {children}
     </div>
   );

@@ -1,0 +1,9 @@
+{
+  "date": "2026-09-29",
+  "framework": "Next.js 16 App Router",
+  "styling": "Tailwind CSS 4 with global CSS",
+  "font_stack": "Avenir Next and SFMono system stacks; retained for deterministic offline builds",
+  "palette": "dark warm neutrals with signal orange #fc4c02",
+  "motion": "framer-motion and motion installed; existing interactions use restrained CSS transitions",
+  "spacing": "4px-derived semantic CSS properties"
+}

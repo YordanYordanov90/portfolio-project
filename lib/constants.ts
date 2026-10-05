@@ -29,6 +29,7 @@ export const PROJECTS = [
     image: "/projects/website-audit-tool.png",
     imageAlt: "Website Audit Tool homepage with URL input and five audit areas",
     link: "https://website-audit-tool-livid.vercel.app/en",
+    article: undefined,
   },
   {
     title: "AI Spec Blueprint",
@@ -48,6 +49,7 @@ export const PROJECTS = [
     image: "/projects/ai-spec-blueprint.png",
     imageAlt: "AI Spec Blueprint project blueprint dashboard",
     link: "https://ai-spec-blueprint.vercel.app/",
+    article: "/blog/ai-spec-blueprint-system-definition-layer",
   },
   {
     title: "PineForge",
@@ -67,6 +69,7 @@ export const PROJECTS = [
     image: "/projects/pineforge.png",
     imageAlt: "PineForge",
     link: "https://pine-forge.vercel.app/",
+    article: undefined,
   },
   {
     title: "Finerel",
@@ -86,20 +89,22 @@ export const PROJECTS = [
     image: "/projects/finerel.png",
     imageAlt: "Finerel",
     link: "https://finerel.com/",
+    article: undefined,
   },
   {
     title: "Ghosty AI",
     featured: false,
     status: "Live product",
-    summary: "A streaming AI writing tool for drafting and refining content.",
+    summary: "A collaborative workspace for shaping system designs with AI.",
     description:
-      "AI writing and content tool built on the Next.js App Router with streaming responses via the Vercel AI SDK.",
-    evidence: ["Streaming responses", "Next.js App Router", "Vercel AI SDK"],
+      "A real-time system design workspace where teams can map ideas visually and use streaming AI responses to refine the plan.",
+    evidence: ["Collaborative canvas", "Streaming responses", "Next.js App Router"],
     tags: ["Next.js", "Tailwind CSS", "shadcn/ui", "AI SDK"],
-    focus: "Streaming responses through the Vercel AI SDK",
+    focus: "Collaborative system design with AI",
     image: "/projects/ghosty-ai.png",
     imageAlt: "Ghosty AI",
     link: "https://ghosty-ai.vercel.app/",
+    article: undefined,
   },
   {
     title: "LeverCast AI",
@@ -114,5 +119,6 @@ export const PROJECTS = [
     image: "/projects/levercast-ai.png",
     imageAlt: "LeverCast AI",
     link: "https://levercast-ai.vercel.app/",
+    article: undefined,
   },
 ] as const;

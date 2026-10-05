@@ -21,6 +21,11 @@ function ProjectActions({ project, compact = false }: { project: Project; compac
       >
         View live product <ExternalLink className="h-3.5 w-3.5" />
       </Link>
+      {project.article ? (
+        <Link href={project.article} className="project-case-study focus-ring">
+          Read case study <ExternalLink className="h-3.5 w-3.5" />
+        </Link>
+      ) : null}
     </div>
   );
 }
